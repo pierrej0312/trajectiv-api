@@ -23,39 +23,32 @@ import java.util.UUID;
                 @Index(name = "idx_users_deleted_at", columnList = "deleted_at")
         }
 )
-@EqualsAndHashCode
-@ToString(exclude = {"profile", "subscription", "aiCreditWallet", "files"})
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Setter
     @Column(name = "keycloak_subject", nullable = false, unique = true, length = 255)
     private String keycloakSubject;
 
-    @Setter
     @Column(name = "email", nullable = false, unique = true, length = 320)
     private String email;
 
-    @Setter
     @Column(name = "email_verified", nullable = false)
     private boolean emailVerified = false;
 
-    @Setter
     @Column(name = "first_name", length = 120)
     private String firstName;
 
-    @Setter
     @Column(name = "last_name", length = 120)
     private String lastName;
 
-    @Setter
     @Column(name = "display_name", length = 180)
     private String displayName;
 
-    @Setter
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 40)
     private UserStatus status = UserStatus.ACTIVE;
@@ -70,25 +63,75 @@ public class User {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @Setter
     @Column(name = "deleted_at")
     private Instant deletedAt;
 
-    @Setter
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private UserProfile profile;
+    private User(
+            String keycloakSubject,
+            String email,
+            boolean emailVerified,
+            String firstName,
+            String lastName,
+            String displayName
+    ) {
+        this.keycloakSubject = keycloakSubject;
+        this.email = email;
+        this.emailVerified = emailVerified;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.displayName = displayName;
+        this.status = UserStatus.ACTIVE;
+        this.lastLoginAt = Instant.now();
+    }
 
-    @Setter
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Subscription subscription;
+    public User() {
+    }
 
-    @Setter
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private AiCreditWallet aiCreditWallet;
+    public static User createFromKeycloak(
+            String keycloakSubject,
+            String email,
+            boolean emailVerified,
+            String firstName,
+            String lastName,
+            String displayName
+    ) {
+        return new User(
+                keycloakSubject,
+                email,
+                emailVerified,
+                firstName,
+                lastName,
+                displayName
+        );
+    }
 
-    @Setter
-    @OneToMany(mappedBy = "ownerUser", fetch = FetchType.LAZY)
-    private List<UserFile> files = new ArrayList<>();
+    public void updateFromKeycloak(
+            String email,
+            boolean emailVerified,
+            String firstName,
+            String lastName,
+            String displayName
+    ) {
+        this.email = email;
+        this.emailVerified = emailVerified;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.displayName = displayName;
+        this.lastLoginAt = Instant.now();
+    }
+
+    public void disable() {
+        this.status = UserStatus.DISABLED;
+    }
+
+    public void activate() {
+        this.status = UserStatus.ACTIVE;
+    }
+
+    public void softDelete() {
+        this.status = UserStatus.DELETED;
+        this.deletedAt = Instant.now();
+    }
 
     @PrePersist
     protected void onCreate() {

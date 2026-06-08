@@ -1,4 +1,4 @@
-package com.trajectiv.repositories;
+package com.trajectiv.dl.repositories;
 
 import com.trajectiv.dl.entities.UserProfile;
 import com.trajectiv.dl.enums.OnboardingStatus;

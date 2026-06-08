@@ -1,4 +1,4 @@
-package com.trajectiv.repositories;
+package com.trajectiv.dl.repositories;
 
 import com.trajectiv.dl.entities.UserFile;
 import com.trajectiv.dl.enums.FileStatus;
@@ -12,6 +12,8 @@ import java.util.UUID;
 public interface UserFileRepository extends JpaRepository<UserFile, UUID> {
 
     Optional<UserFile> findByStorageKey(String storageKey);
+
+    Optional<UserFile> findByIdAndOwnerUserId(UUID id, UUID ownerUserId);
 
     List<UserFile> findByOwnerUserIdAndKindAndDeletedAtIsNull(
             UUID ownerUserId,
