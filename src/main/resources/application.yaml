@@ -1,3 +1,57 @@
 spring:
   application:
     name: trajectiv-api
+
+  config:
+    import: optional:file:.env[.properties]
+
+  datasource:
+    url: ${DATA_URL:jdbc:postgresql://localhost:5434/trajectiv}
+    username: ${DATA_USERNAME:postgres}
+    password: ${DATA_PASSWORD:Failure70}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+
+  flyway:
+    enabled: true
+
+  sql:
+    init:
+      mode: never
+
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8080/realms/trajectiv}
+
+server:
+  port: ${API_PORT:8081}
+  servlet:
+    context-path: /api
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+trajectiv:
+  storage:
+    provider: ${STORAGE_PROVIDER:local}
+    local-root: ${STORAGE_LOCAL_ROOT:./storage}
+    public-base-url: ${STORAGE_PUBLIC_BASE_URL:http://localhost:8081/files}
+    max-avatar-size-bytes: ${STORAGE_MAX_AVATAR_SIZE_BYTES:2097152}
