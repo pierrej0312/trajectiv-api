@@ -11,6 +11,7 @@ import com.trajectiv.bll.mappers.UserBllMapper;
 import com.trajectiv.bll.mappers.UserProfileBllMapper;
 import com.trajectiv.bll.services.me.MeService;
 import com.trajectiv.bll.services.me.UserSyncService;
+import com.trajectiv.bll.services.onboarding.OnboardingService;
 import com.trajectiv.dl.entities.AiCreditWallet;
 import com.trajectiv.dl.entities.Subscription;
 import com.trajectiv.dl.entities.User;
@@ -42,6 +43,8 @@ public class MeServiceImpl implements MeService {
     private final SubscriptionBllMapper subscriptionBllMapper;
     private final AiCreditBllMapper aiCreditBllMapper;
 
+    private final OnboardingService onboardingService;
+
     @Override
     @Transactional
     public MeBllDto getMe(Authentication authentication) {
@@ -68,7 +71,7 @@ public class MeServiceImpl implements MeService {
                         "ai_credit_wallet"
                 ));
 
-        MeOnboardingBllDto onboarding = buildOnboardingDto(profile);
+        MeOnboardingBllDto onboarding = onboardingService.buildOnboarding(profile);
 
         return new MeBllDto(
                 userBllMapper.toDto(user),
@@ -77,35 +80,5 @@ public class MeServiceImpl implements MeService {
                 subscriptionBllMapper.toDto(subscription),
                 aiCreditBllMapper.toDto(wallet)
         );
-    }
-
-    private MeOnboardingBllDto buildOnboardingDto(UserProfile profile) {
-        return new MeOnboardingBllDto(
-                profile.getOnboardingStatus(),
-                profile.getOnboardingCompletedAt(),
-                resolveMissingFields(profile)
-        );
-    }
-
-    private List<OnboardingMissingField> resolveMissingFields(UserProfile profile) {
-        if (profile.getOnboardingStatus() == OnboardingStatus.COMPLETED) {
-            return List.of();
-        }
-
-        List<OnboardingMissingField> missingFields = new ArrayList<>();
-
-        if (profile.getCareerGoal() == null) {
-            missingFields.add(OnboardingMissingField.CAREER_GOAL);
-        }
-
-        if (profile.getTargetRole() == null || profile.getTargetRole().isBlank()) {
-            missingFields.add(OnboardingMissingField.TARGET_ROLE);
-        }
-
-        if (profile.getExperienceLevel() == null) {
-            missingFields.add(OnboardingMissingField.EXPERIENCE_LEVEL);
-        }
-
-        return missingFields;
     }
 }

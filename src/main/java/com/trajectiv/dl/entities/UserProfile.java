@@ -85,12 +85,20 @@ public class UserProfile {
             ExperienceLevel experienceLevel,
             String preferredLanguage
     ) {
-        this.careerGoal = careerGoal;
-        this.targetRole = targetRole;
-        this.experienceLevel = experienceLevel;
+        if (careerGoal != null) {
+            this.careerGoal = careerGoal;
+        }
+
+        if (targetRole != null && !targetRole.isBlank()) {
+            this.targetRole = targetRole.trim();
+        }
+
+        if (experienceLevel != null) {
+            this.experienceLevel = experienceLevel;
+        }
 
         if (preferredLanguage != null && !preferredLanguage.isBlank()) {
-            this.preferredLanguage = preferredLanguage;
+            this.preferredLanguage = preferredLanguage.trim().toLowerCase();
         }
 
         if (this.onboardingStatus != OnboardingStatus.COMPLETED) {

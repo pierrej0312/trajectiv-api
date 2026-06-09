@@ -1,7 +1,10 @@
-package com.trajectiv.bll.mappers;
+package com.trajectiv.api.mappers;
 
 import com.trajectiv.api.dto.me.*;
 import com.trajectiv.bll.dto.me.MeBllDto;
+import com.trajectiv.bll.dto.me.MeOnboardingBllDto;
+import com.trajectiv.bll.dto.me.UpdateUserProfileCommandBllDto;
+import com.trajectiv.bll.dto.me.UpdatedUserProfileBllDto;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -54,6 +57,38 @@ public class MeApiMapper {
                 me.credits().monthlyLimit(),
                 me.credits().used(),
                 me.credits().remaining()
+        );
+    }
+    public UpdateUserProfileCommandBllDto toBllCommand(UpdateMeProfileRequestApiDto request) {
+        return new UpdateUserProfileCommandBllDto(
+                request.careerGoal(),
+                request.targetRole(),
+                request.experienceLevel(),
+                request.preferredLanguage()
+        );
+    }
+
+    public UpdatedMeProfileResponseApiDto toUpdatedProfileApiDto(UpdatedUserProfileBllDto updatedProfile) {
+        return new UpdatedMeProfileResponseApiDto(
+                new MeProfileApiDto(
+                        updatedProfile.profile().careerGoal(),
+                        updatedProfile.profile().targetRole(),
+                        updatedProfile.profile().experienceLevel(),
+                        updatedProfile.profile().preferredLanguage()
+                ),
+                new MeOnboardingApiDto(
+                        updatedProfile.onboarding().status(),
+                        updatedProfile.onboarding().completedAt(),
+                        updatedProfile.onboarding().missingFields()
+                )
+        );
+    }
+
+    public MeOnboardingApiDto toOnboardingApiDto(MeOnboardingBllDto onboarding) {
+        return new MeOnboardingApiDto(
+                onboarding.status(),
+                onboarding.completedAt(),
+                onboarding.missingFields()
         );
     }
 }

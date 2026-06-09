@@ -3,7 +3,7 @@ package com.trajectiv.api.controllers.v1.me;
 import com.trajectiv.api.dto.me.MeResponseApiDto;
 import com.trajectiv.api.routes.ApiRoutes;
 import com.trajectiv.bll.dto.me.MeBllDto;
-import com.trajectiv.bll.mappers.MeApiMapper;
+import com.trajectiv.api.mappers.MeApiMapper;
 import com.trajectiv.bll.services.me.MeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;

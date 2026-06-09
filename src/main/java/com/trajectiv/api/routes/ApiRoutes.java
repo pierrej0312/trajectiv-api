@@ -12,8 +12,12 @@ public final class ApiRoutes {
         }
 
         public static final String SECURITY = API_V1 + "/security";
+
         public static final String ME = API_V1 + "/me";
-        public static final String ONBOARDING = API_V1 + "/onboarding";
+        public static final String ME_PROFILE = ME + "/profile";
+        public static final String ME_AVATAR = ME + "/avatar";
+        public static final String ME_ONBOARDING = ME + "/onboarding";
+
         public static final String OPPORTUNITIES = API_V1 + "/opportunities";
     }
 }
