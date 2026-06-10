@@ -28,7 +28,7 @@ public class ProfileController {
     private final UserProfileService userProfileService;
     private final MeApiMapper meApiMapper;
 
-    @PatchMapping("/profile")
+    @PatchMapping
     @Operation(summary = "Update current user profile")
     public UpdatedMeProfileResponseApiDto updateProfile(
             Authentication authentication,
