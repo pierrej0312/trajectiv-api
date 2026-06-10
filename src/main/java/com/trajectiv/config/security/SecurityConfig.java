@@ -40,9 +40,11 @@ public class SecurityConfig {
                                 "/swagger-ui/**",
                                 "/v3/api-docs",
                                 "/v3/api-docs/**",
-                                "/v3/api-docs.yaml"
+                                "/v3/api-docs.yaml",
+
+                                "/files/**"
                         ).permitAll()
-                        .requestMatchers("/v1/me/**").authenticated()
+                        .requestMatchers("/v1/me", "/v1/me/**").authenticated()
                         .requestMatchers("/v1/security/**").authenticated()
                         .anyRequest().authenticated()
                 )

@@ -1,5 +1,6 @@
 package com.trajectiv.config.security;
 
+import jakarta.validation.constraints.NotEmpty;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -22,7 +23,7 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, Abstra
     private static final String ROLES = "roles";
 
     @Override
-    public AbstractAuthenticationToken convert(@NonNull Jwt jwt) {
+    public AbstractAuthenticationToken convert(@NotEmpty Jwt jwt) {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
 
         authorities.addAll(extractRealmRoles(jwt));

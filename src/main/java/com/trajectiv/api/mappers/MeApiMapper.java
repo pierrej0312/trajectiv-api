@@ -5,6 +5,7 @@ import com.trajectiv.bll.dto.me.MeBllDto;
 import com.trajectiv.bll.dto.me.MeOnboardingBllDto;
 import com.trajectiv.bll.dto.me.UpdateUserProfileCommandBllDto;
 import com.trajectiv.bll.dto.me.UpdatedUserProfileBllDto;
+import com.trajectiv.bll.dto.storage.StoredAvatarBllDto;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -89,6 +90,13 @@ public class MeApiMapper {
                 onboarding.status(),
                 onboarding.completedAt(),
                 onboarding.missingFields()
+        );
+    }
+
+    public MeAvatarApiDto toAvatarApiDto(StoredAvatarBllDto avatar) {
+        return new MeAvatarApiDto(
+                avatar.fileId(),
+                avatar.avatarUrl()
         );
     }
 }
