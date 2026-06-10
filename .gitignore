@@ -33,6 +33,5 @@ build/
 .vscode/
 
 .env
-storage/
 .DS_Store
 *.log
