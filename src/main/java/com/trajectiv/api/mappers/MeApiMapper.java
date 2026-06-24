@@ -62,6 +62,7 @@ public class MeApiMapper {
     }
     public UpdateUserProfileCommandBllDto toBllCommand(UpdateMeProfileRequestApiDto request) {
         return new UpdateUserProfileCommandBllDto(
+                request.displayName(),
                 request.careerGoal(),
                 request.targetRole(),
                 request.experienceLevel(),

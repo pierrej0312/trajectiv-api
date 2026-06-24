@@ -5,6 +5,8 @@ import com.trajectiv.dl.enums.ExperienceLevel;
 import jakarta.validation.constraints.Size;
 
 public record UpdateMeProfileRequestApiDto(
+        String displayName,
+
         CareerGoal careerGoal,
 
         @Size(max = 180)

@@ -46,6 +46,10 @@ public class UserProfileServiceImpl implements UserProfileService {
                 command.preferredLanguage()
         );
 
+        if(command.displayName() != null) {
+            user.setDisplayName(command.displayName());
+        }
+
         UserProfile savedProfile = userProfileRepository.save(profile);
 
         return new UpdatedUserProfileBllDto(

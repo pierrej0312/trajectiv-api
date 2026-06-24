@@ -46,6 +46,7 @@ public class User {
     @Column(name = "last_name", length = 120)
     private String lastName;
 
+    @Setter
     @Column(name = "display_name", length = 180)
     private String displayName;
 
