@@ -1,5 +1,6 @@
 package com.trajectiv.api.controllers.v1.me;
 
+import ch.qos.logback.core.boolex.EvaluationException;
 import com.trajectiv.api.dto.me.UpdateMeProfileRequestApiDto;
 import com.trajectiv.api.dto.me.UpdatedMeProfileResponseApiDto;
 import com.trajectiv.api.mappers.MeApiMapper;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(ApiRoutes.V1.ME_PROFILE)
+@RequestMapping(
+        value = ApiRoutes.V1.ME_PROFILE,
+        consumes = MediaType.APPLICATION_JSON_VALUE,
+        produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 @SecurityRequirement(
         name = "keycloakOAuth2",
