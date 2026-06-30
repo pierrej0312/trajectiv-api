@@ -1,6 +1,7 @@
 package com.trajectiv.api.mappers;
 
 import com.trajectiv.api.dto.me.*;
+import com.trajectiv.api.dto.me.avatar.MeAvatarApiDto;
 import com.trajectiv.bll.dto.me.MeBllDto;
 import com.trajectiv.bll.dto.me.MeOnboardingBllDto;
 import com.trajectiv.bll.dto.me.UpdateUserProfileCommandBllDto;

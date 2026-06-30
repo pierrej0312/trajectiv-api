@@ -1,4 +1,4 @@
-package com.trajectiv.api.dto.me;
+package com.trajectiv.api.dto.me.avatar;
 
 import java.util.UUID;
 

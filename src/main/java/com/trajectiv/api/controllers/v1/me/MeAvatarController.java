@@ -1,6 +1,6 @@
 package com.trajectiv.api.controllers.v1.me;
 
-import com.trajectiv.api.dto.me.MeAvatarApiDto;
+import com.trajectiv.api.dto.me.avatar.MeAvatarApiDto;
 import com.trajectiv.api.mappers.MeApiMapper;
 import com.trajectiv.api.routes.ApiRoutes;
 import com.trajectiv.bll.dto.storage.StoredAvatarBllDto;
