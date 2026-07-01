@@ -22,7 +22,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@RequestMapping(ApiRoutes.V1.ME_AVATAR)
+@RequestMapping(
+        value = ApiRoutes.V1.ME_AVATAR,
+        produces = MediaType.APPLICATION_JSON_VALUE
+)
 @RequiredArgsConstructor
 @SecurityRequirement(
         name = "keycloakOAuth2",
@@ -92,7 +95,7 @@ public class MeAvatarController {
         return avatarCustomizationApiMapper.toApiDto(createdCustomization);
     }
 
-    @GetMapping
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Get current user avatar customization")
     public AvatarCustomizationResponseApiDto getAvatarCustomization(Authentication authentication) {
         var customization = avatarCustomizationService.getCurrentUserAvatarCustomization(authentication);
@@ -100,7 +103,10 @@ public class MeAvatarController {
         return avatarCustomizationApiMapper.toApiDto(customization);
     }
 
-    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     @Operation(summary = "Patch current user avatar customization")
     public AvatarCustomizationResponseApiDto patchAvatarCustomization(
             Authentication authentication,
