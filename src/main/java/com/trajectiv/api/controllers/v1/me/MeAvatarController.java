@@ -80,7 +80,11 @@ public class MeAvatarController {
         return meApiMapper.toAvatarApiDto(avatar);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(
+            value = "/customization",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create current user avatar customization")
     public AvatarCustomizationResponseApiDto createAvatarCustomization(
@@ -95,7 +99,10 @@ public class MeAvatarController {
         return avatarCustomizationApiMapper.toApiDto(createdCustomization);
     }
 
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(
+            value = "/customization",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
     @Operation(summary = "Get current user avatar customization")
     public AvatarCustomizationResponseApiDto getAvatarCustomization(Authentication authentication) {
         var customization = avatarCustomizationService.getCurrentUserAvatarCustomization(authentication);
@@ -104,6 +111,7 @@ public class MeAvatarController {
     }
 
     @PatchMapping(
+            value = "/customization",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
@@ -120,7 +128,7 @@ public class MeAvatarController {
         return avatarCustomizationApiMapper.toApiDto(updatedCustomization);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/customization")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete current user avatar customization")
     public void deleteAvatarCustomization(Authentication authentication) {
