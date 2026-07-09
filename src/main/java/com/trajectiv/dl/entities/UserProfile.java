@@ -3,6 +3,7 @@ package com.trajectiv.dl.entities;
 import com.trajectiv.dl.enums.CareerGoal;
 import com.trajectiv.dl.enums.ExperienceLevel;
 import com.trajectiv.dl.enums.OnboardingStatus;
+import com.trajectiv.dl.enums.TargetRoleSource;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.ToString;
@@ -18,10 +19,13 @@ import java.util.UUID;
                 @Index(name = "idx_user_profiles_user_id", columnList = "user_id"),
                 @Index(name = "idx_user_profiles_avatar_file_id", columnList = "avatar_file_id"),
                 @Index(name = "idx_user_profiles_onboarding_status", columnList = "onboarding_status"),
-                @Index(name = "idx_user_profiles_career_goal", columnList = "career_goal")
+                @Index(name = "idx_user_profiles_career_goal", columnList = "career_goal"),
+                @Index(name = "idx_user_profiles_target_role_id", columnList = "target_role_id"),
+                @Index(name = "idx_user_profiles_target_role_source", columnList = "target_role_source"),
+                @Index(name = "idx_user_profiles_target_role_label", columnList = "target_role_label")
         }
 )
-@ToString(exclude = {"user", "avatarFile"})
+@ToString(exclude = {"user", "avatarFile", "targetRole"})
 public class UserProfile {
 
     @Id
@@ -43,8 +47,16 @@ public class UserProfile {
     @Column(name = "career_goal", length = 60)
     private CareerGoal careerGoal;
 
-    @Column(name = "target_role", length = 180)
-    private String targetRole;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "target_role_id")
+    private JobRole targetRole;
+
+    @Column(name = "target_role_label", length = 180)
+    private String targetRoleLabel;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "target_role_source", nullable = false, length = 40)
+    private TargetRoleSource targetRoleSource = TargetRoleSource.CUSTOM;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "experience_level", length = 60)
@@ -73,6 +85,7 @@ public class UserProfile {
         this.user = user;
         this.preferredLanguage = "fr";
         this.onboardingStatus = OnboardingStatus.NOT_STARTED;
+        this.targetRoleSource = TargetRoleSource.CUSTOM;
     }
 
     public static UserProfile createDefault(User user) {
@@ -81,7 +94,9 @@ public class UserProfile {
 
     public void updateProfile(
             CareerGoal careerGoal,
-            String targetRole,
+            JobRole targetRole,
+            String targetRoleLabel,
+            TargetRoleSource targetRoleSource,
             ExperienceLevel experienceLevel,
             String preferredLanguage
     ) {
@@ -89,9 +104,7 @@ public class UserProfile {
             this.careerGoal = careerGoal;
         }
 
-        if (targetRole != null && !targetRole.isBlank()) {
-            this.targetRole = targetRole.trim();
-        }
+        updateTargetRole(targetRole, targetRoleLabel, targetRoleSource);
 
         if (experienceLevel != null) {
             this.experienceLevel = experienceLevel;
@@ -104,6 +117,39 @@ public class UserProfile {
         if (this.onboardingStatus != OnboardingStatus.COMPLETED) {
             this.onboardingStatus = OnboardingStatus.IN_PROGRESS;
         }
+    }
+
+    public void updateTargetRole(
+            JobRole targetRole,
+            String targetRoleLabel,
+            TargetRoleSource targetRoleSource
+    ) {
+        if (targetRole != null) {
+            this.targetRole = targetRole;
+            this.targetRoleLabel = resolveCatalogRoleLabel(targetRole, targetRoleLabel);
+            this.targetRoleSource = TargetRoleSource.CATALOG;
+            return;
+        }
+
+        if (targetRoleLabel != null && !targetRoleLabel.isBlank()) {
+            this.targetRole = null;
+            this.targetRoleLabel = targetRoleLabel.trim();
+            this.targetRoleSource = targetRoleSource != null
+                    ? targetRoleSource
+                    : TargetRoleSource.CUSTOM;
+        }
+    }
+
+    public String getResolvedTargetRoleLabel() {
+        if (targetRoleLabel != null && !targetRoleLabel.isBlank()) {
+            return targetRoleLabel;
+        }
+
+        if (targetRole != null) {
+            return targetRole.getLabel();
+        }
+
+        return null;
     }
 
     public void updateAvatar(UserFile avatarFile, String avatarUrl) {
@@ -134,10 +180,22 @@ public class UserProfile {
         if (this.onboardingStatus == null) {
             this.onboardingStatus = OnboardingStatus.NOT_STARTED;
         }
+
+        if (this.targetRoleSource == null) {
+            this.targetRoleSource = TargetRoleSource.CUSTOM;
+        }
     }
 
     @PreUpdate
     protected void onUpdate() {
         this.updatedAt = Instant.now();
+
+        if (this.targetRoleSource == null) {
+            this.targetRoleSource = TargetRoleSource.CUSTOM;
+        }
+    }
+
+    private String resolveCatalogRoleLabel(JobRole targetRole, String targetRoleLabel) {
+        return targetRole.getLabel();
     }
 }

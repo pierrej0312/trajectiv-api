@@ -46,7 +46,9 @@ public class OnboardingServiceImpl implements OnboardingService {
             missingFields.add(OnboardingMissingField.CAREER_GOAL);
         }
 
-        if (profile.getTargetRole() == null || profile.getTargetRole().isBlank()) {
+        String targetRoleLabel = profile.getResolvedTargetRoleLabel();
+
+        if (targetRoleLabel == null || targetRoleLabel.isBlank()){
             missingFields.add(OnboardingMissingField.TARGET_ROLE);
         }
 

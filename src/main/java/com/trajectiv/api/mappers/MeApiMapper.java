@@ -33,7 +33,9 @@ public class MeApiMapper {
     private MeProfileApiDto toProfileApiDto(MeBllDto me) {
         return new MeProfileApiDto(
                 me.profile().careerGoal(),
-                me.profile().targetRole(),
+                me.profile().targetRoleId(),
+                me.profile().targetRoleLabel(),
+                me.profile().targetRoleSource(),
                 me.profile().experienceLevel(),
                 me.profile().preferredLanguage()
         );
@@ -65,7 +67,9 @@ public class MeApiMapper {
         return new UpdateUserProfileCommandBllDto(
                 request.displayName(),
                 request.careerGoal(),
-                request.targetRole(),
+                request.targetRoleId(),
+                request.targetRoleLabel(),
+                request.targetRoleSource(),
                 request.experienceLevel(),
                 request.preferredLanguage()
         );
@@ -75,7 +79,9 @@ public class MeApiMapper {
         return new UpdatedMeProfileResponseApiDto(
                 new MeProfileApiDto(
                         updatedProfile.profile().careerGoal(),
-                        updatedProfile.profile().targetRole(),
+                        updatedProfile.profile().targetRoleId(),
+                        updatedProfile.profile().targetRoleLabel(),
+                        updatedProfile.profile().targetRoleSource(),
                         updatedProfile.profile().experienceLevel(),
                         updatedProfile.profile().preferredLanguage()
                 ),

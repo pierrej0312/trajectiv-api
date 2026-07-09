@@ -1,4 +1,4 @@
-package com.trajectiv.bll.services.me.impl;
+package com.trajectiv.bll.services.me;
 
 import com.trajectiv.bll.dto.me.MeBllDto;
 import com.trajectiv.bll.dto.me.MeOnboardingBllDto;

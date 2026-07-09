@@ -19,5 +19,7 @@ public final class ApiRoutes {
         public static final String ME_ONBOARDING = ME + "/onboarding";
 
         public static final String OPPORTUNITIES = API_V1 + "/opportunities";
+
+        public static final String JOB_ROLES = API_V1 + "/job-roles";
     }
 }
