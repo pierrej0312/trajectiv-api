@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(
         value = ApiRoutes.V1.ME_PROFILE,
-        consumes = MediaType.APPLICATION_JSON_VALUE,
         produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 @SecurityRequirement(
@@ -34,7 +33,7 @@ public class ProfileController {
     private final ProfileCompletionService profileCompletionService;
     private final MeApiMapper meApiMapper;
 
-    @PatchMapping
+    @PatchMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(summary = "Update current user profile")
     public ResponseEntity<UpdatedMeProfileResponseApiDto> updateProfile(
             Authentication authentication,
