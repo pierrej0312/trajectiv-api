@@ -17,6 +17,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -49,7 +50,7 @@ public class MeAvatarController {
                     scopes = {"openid", "profile", "email"}
             )
     )
-    public MeAvatarApiDto uploadAvatar(
+    public ResponseEntity<MeAvatarApiDto> uploadAvatar(
             Authentication authentication,
 
             @Parameter(
@@ -63,7 +64,7 @@ public class MeAvatarController {
                 file
         );
 
-        return meApiMapper.toAvatarApiDto(avatar);
+        return ResponseEntity.ok(meApiMapper.toAvatarApiDto(avatar));
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -74,10 +75,10 @@ public class MeAvatarController {
                     scopes = {"openid", "profile", "email"}
             )
     )
-    public MeAvatarApiDto deleteAvatar(Authentication authentication) {
+    public ResponseEntity<MeAvatarApiDto> deleteAvatar(Authentication authentication) {
         StoredAvatarBllDto avatar = avatarStorageService.deleteCurrentUserAvatar(authentication);
 
-        return meApiMapper.toAvatarApiDto(avatar);
+        return ResponseEntity.ok(meApiMapper.toAvatarApiDto(avatar));
     }
 
     @PostMapping(
@@ -87,7 +88,7 @@ public class MeAvatarController {
     )
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Create current user avatar customization")
-    public AvatarCustomizationResponseApiDto createAvatarCustomization(
+    public ResponseEntity<AvatarCustomizationResponseApiDto> createAvatarCustomization(
             Authentication authentication,
             @Valid @RequestBody CreateAvatarCustomizationRequestApiDto request
     ) {
@@ -96,7 +97,7 @@ public class MeAvatarController {
                 avatarCustomizationApiMapper.toBllCommand(request)
         );
 
-        return avatarCustomizationApiMapper.toApiDto(createdCustomization);
+        return ResponseEntity.status(HttpStatus.CREATED).body(avatarCustomizationApiMapper.toApiDto(createdCustomization));
     }
 
     @GetMapping(
@@ -104,10 +105,10 @@ public class MeAvatarController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @Operation(summary = "Get current user avatar customization")
-    public AvatarCustomizationResponseApiDto getAvatarCustomization(Authentication authentication) {
+    public ResponseEntity<AvatarCustomizationResponseApiDto> getAvatarCustomization(Authentication authentication) {
         var customization = avatarCustomizationService.getCurrentUserAvatarCustomization(authentication);
 
-        return avatarCustomizationApiMapper.toApiDto(customization);
+        return ResponseEntity.ok(avatarCustomizationApiMapper.toApiDto(customization));
     }
 
     @PatchMapping(
@@ -116,7 +117,7 @@ public class MeAvatarController {
             produces = MediaType.APPLICATION_JSON_VALUE
     )
     @Operation(summary = "Patch current user avatar customization")
-    public AvatarCustomizationResponseApiDto patchAvatarCustomization(
+    public ResponseEntity<AvatarCustomizationResponseApiDto> patchAvatarCustomization(
             Authentication authentication,
             @Valid @RequestBody PatchAvatarCustomizationRequestApiDto request
     ) {
@@ -125,7 +126,7 @@ public class MeAvatarController {
                 avatarCustomizationApiMapper.toBllCommand(request)
         );
 
-        return avatarCustomizationApiMapper.toApiDto(updatedCustomization);
+        return ResponseEntity.ok(avatarCustomizationApiMapper.toApiDto(updatedCustomization));
     }
 
     @DeleteMapping("/customization")

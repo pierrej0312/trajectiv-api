@@ -2,12 +2,11 @@ package com.trajectiv.api.mappers;
 
 import com.trajectiv.api.dto.me.*;
 import com.trajectiv.api.dto.me.avatar.MeAvatarApiDto;
-import com.trajectiv.bll.dto.me.MeBllDto;
-import com.trajectiv.bll.dto.me.MeOnboardingBllDto;
-import com.trajectiv.bll.dto.me.UpdateUserProfileCommandBllDto;
-import com.trajectiv.bll.dto.me.UpdatedUserProfileBllDto;
+import com.trajectiv.bll.dto.me.*;
 import com.trajectiv.bll.dto.storage.StoredAvatarBllDto;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class MeApiMapper {
@@ -105,6 +104,15 @@ public class MeApiMapper {
         return new MeAvatarApiDto(
                 avatar.fileId(),
                 avatar.avatarUrl()
+        );
+    }
+
+    public ProfileCompletionResponseApiDto toProfileCompletionApiDto(ProfileCompletionResponseBllDto profileCompletion) {
+        //TODO MAP TO API DTO
+        return new ProfileCompletionResponseApiDto(
+                profileCompletion.completionPercentage(),
+                profileCompletion.missingFields(),
+                profileCompletion.recommendedActions()
         );
     }
 }

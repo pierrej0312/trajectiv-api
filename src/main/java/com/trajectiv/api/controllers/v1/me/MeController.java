@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +32,9 @@ public class MeController {
 
     @GetMapping
     @Operation(summary = "Get current authenticated user context")
-    public MeResponseApiDto getMe(Authentication authentication) {
+    public ResponseEntity<MeResponseApiDto> getMe(Authentication authentication) {
         MeBllDto me = meService.getMe(authentication);
 
-        return meApiMapper.toApiDto(me);
+        return ResponseEntity.ok(meApiMapper.toApiDto(me));
     }
 }
