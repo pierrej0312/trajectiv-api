@@ -108,7 +108,6 @@ public class MeApiMapper {
     }
 
     public ProfileCompletionResponseApiDto toProfileCompletionApiDto(ProfileCompletionResponseBllDto profileCompletion) {
-        //TODO MAP TO API DTO
         return new ProfileCompletionResponseApiDto(
                 profileCompletion.completionPercentage(),
                 profileCompletion.missingFields(),
