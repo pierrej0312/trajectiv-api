@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(ApiRoutes.V1.ME_ONBOARDING)
+@RequestMapping(
+        ApiRoutes.V1.ME_ONBOARDING
+)
 @RequiredArgsConstructor
 @SecurityRequirement(
         name = "keycloakOAuth2",

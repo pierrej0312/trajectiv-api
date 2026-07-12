@@ -22,7 +22,9 @@ public class AvatarCustomizationBllMapper {
                 sourcePhotoFile != null ? sourcePhotoFile.getId() : null,
                 sourcePhotoFile != null ? sourcePhotoFile.getPublicUrl() : null,
                 faceTextureFile != null ? faceTextureFile.getId() : null,
-                faceTextureFile != null ? faceTextureFile.getPublicUrl() : null
+                faceTextureFile != null ? faceTextureFile.getPublicUrl() : null,
+                entity.getTopStyle(),
+                entity.getBottomStyle()
         );
     }
 }

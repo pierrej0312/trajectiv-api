@@ -18,7 +18,9 @@ public class AvatarCustomizationApiMapper {
                 request.hairStyle(),
                 request.hairColor(),
                 request.beardStyle(),
-                request.beardColor()
+                request.beardColor(),
+                request.topStyle(),
+                request.bottomStyle()
         );
     }
 
@@ -30,7 +32,9 @@ public class AvatarCustomizationApiMapper {
                 request.hairStyle(),
                 request.hairColor(),
                 request.beardStyle(),
-                request.beardColor()
+                request.beardColor(),
+                request.topStyle(),
+                request.bottomStyle()
         );
     }
 
@@ -44,6 +48,8 @@ public class AvatarCustomizationApiMapper {
                 dto.hairColor(),
                 dto.beardStyle(),
                 dto.beardColor(),
+                dto.topStyle(),
+                dto.bottomStyle(),
                 dto.sourcePhotoFileId(),
                 dto.sourcePhotoUrl(),
                 dto.faceTextureFileId(),

@@ -1,9 +1,6 @@
 package com.trajectiv.dl.entities;
 
-import com.trajectiv.dl.enums.AvatarBeardStyle;
-import com.trajectiv.dl.enums.AvatarBodyType;
-import com.trajectiv.dl.enums.AvatarHairStyle;
-import com.trajectiv.dl.enums.AvatarSkinTone;
+import com.trajectiv.dl.enums.*;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -66,6 +63,14 @@ public class UserAvatarCustomization {
     @JoinColumn(name = "face_texture_file_id")
     private UserFile faceTextureFile;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "top_style", nullable = false, length = 60)
+    private AvatarTopStyle topStyle;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "bottom_style", nullable = false, length = 60)
+    private AvatarBottomStyle bottomStyle;
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
@@ -83,7 +88,9 @@ public class UserAvatarCustomization {
             AvatarHairStyle hairStyle,
             String hairColor,
             AvatarBeardStyle beardStyle,
-            String beardColor
+            String beardColor,
+            AvatarTopStyle topStyle,
+            AvatarBottomStyle bottomStyle
     ) {
         this.user = user;
         this.bodyType = bodyType;
@@ -93,6 +100,8 @@ public class UserAvatarCustomization {
         this.hairColor = hairColor;
         this.beardStyle = beardStyle;
         this.beardColor = beardColor;
+        this.topStyle = topStyle;
+        this.bottomStyle = bottomStyle;
     }
 
     public static UserAvatarCustomization create(
@@ -103,7 +112,9 @@ public class UserAvatarCustomization {
             AvatarHairStyle hairStyle,
             String hairColor,
             AvatarBeardStyle beardStyle,
-            String beardColor
+            String beardColor,
+            AvatarTopStyle topStyle,
+            AvatarBottomStyle bottomStyle
     ) {
         return new UserAvatarCustomization(
                 user,
@@ -113,7 +124,9 @@ public class UserAvatarCustomization {
                 hairStyle,
                 hairColor,
                 beardStyle,
-                beardColor
+                beardColor,
+                topStyle,
+                bottomStyle
         );
     }
 
@@ -124,7 +137,9 @@ public class UserAvatarCustomization {
             AvatarHairStyle hairStyle,
             String hairColor,
             AvatarBeardStyle beardStyle,
-            String beardColor
+            String beardColor,
+            AvatarTopStyle topStyle,
+            AvatarBottomStyle bottomStyle
     ) {
         if (bodyType != null) {
             this.bodyType = bodyType;
@@ -152,6 +167,14 @@ public class UserAvatarCustomization {
 
         if (beardColor != null && !beardColor.isBlank()) {
             this.beardColor = beardColor.trim();
+        }
+
+        if (topStyle != null) {
+            this.topStyle = topStyle;
+        }
+
+        if (bottomStyle != null) {
+            this.bottomStyle = bottomStyle;
         }
     }
 

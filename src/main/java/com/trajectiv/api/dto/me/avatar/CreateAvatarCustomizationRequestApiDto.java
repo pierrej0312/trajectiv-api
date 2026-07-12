@@ -1,9 +1,6 @@
 package com.trajectiv.api.dto.me.avatar;
 
-import com.trajectiv.dl.enums.AvatarBeardStyle;
-import com.trajectiv.dl.enums.AvatarBodyType;
-import com.trajectiv.dl.enums.AvatarHairStyle;
-import com.trajectiv.dl.enums.AvatarSkinTone;
+import com.trajectiv.dl.enums.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -16,6 +13,8 @@ public record CreateAvatarCustomizationRequestApiDto(
         @NotNull AvatarHairStyle hairStyle,
         @NotNull @Pattern(regexp = "^#[0-9A-Fa-f]{6}$") String hairColor,
         @NotNull AvatarBeardStyle beardStyle,
-        @NotNull @Pattern(regexp = "^#[0-9A-Fa-f]{6}$") String beardColor
+        @NotNull @Pattern(regexp = "^#[0-9A-Fa-f]{6}$") String beardColor,
+        @NotNull AvatarTopStyle topStyle,
+        @NotNull AvatarBottomStyle bottomStyle
 ) {
 }

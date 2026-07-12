@@ -51,7 +51,9 @@ public class AvatarCustomizationServiceImpl implements AvatarCustomizationServic
                 command.hairStyle(),
                 command.hairColor().trim(),
                 command.beardStyle(),
-                command.beardColor().trim()
+                command.beardColor().trim(),
+                command.topStyle(),
+                command.bottomStyle()
         );
 
         UserAvatarCustomization savedCustomization = avatarCustomizationRepository.save(customization);
@@ -100,7 +102,9 @@ public class AvatarCustomizationServiceImpl implements AvatarCustomizationServic
                 command.hairStyle(),
                 command.hairColor(),
                 command.beardStyle(),
-                command.beardColor()
+                command.beardColor(),
+                command.topStyle(),
+                command.bottomStyle()
         );
 
         return avatarCustomizationBllMapper.toBllDto(customization);

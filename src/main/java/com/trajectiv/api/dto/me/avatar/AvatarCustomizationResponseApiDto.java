@@ -1,9 +1,6 @@
 package com.trajectiv.api.dto.me.avatar;
 
-import com.trajectiv.dl.enums.AvatarBeardStyle;
-import com.trajectiv.dl.enums.AvatarBodyType;
-import com.trajectiv.dl.enums.AvatarHairStyle;
-import com.trajectiv.dl.enums.AvatarSkinTone;
+import com.trajectiv.dl.enums.*;
 
 import java.util.UUID;
 
@@ -16,6 +13,8 @@ public record AvatarCustomizationResponseApiDto(
         String hairColor,
         AvatarBeardStyle beardStyle,
         String beardColor,
+        AvatarTopStyle topStyle,
+        AvatarBottomStyle bottomStyle,
         UUID sourcePhotoFileId,
         String sourcePhotoUrl,
         UUID faceTextureFileId,
