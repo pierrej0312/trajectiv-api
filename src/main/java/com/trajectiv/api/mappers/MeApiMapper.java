@@ -59,7 +59,10 @@ public class MeApiMapper {
         return new MeCreditsApiDto(
                 me.credits().monthlyLimit(),
                 me.credits().used(),
-                me.credits().remaining()
+                me.credits().remaining(),
+                me.credits().periodStart(),
+                me.credits().periodEnd(),
+                me.credits().nextRenewalDate()
         );
     }
     public UpdateUserProfileCommandBllDto toBllCommand(UpdateMeProfileRequestApiDto request) {

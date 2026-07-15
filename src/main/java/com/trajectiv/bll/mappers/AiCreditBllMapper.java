@@ -11,7 +11,10 @@ public class AiCreditBllMapper {
         return new AiCreditWalletBllDto(
                 wallet.getMonthlyLimit(),
                 wallet.getUsedThisPeriod(),
-                wallet.getRemaining()
+                wallet.getRemaining(),
+                wallet.getPeriodStart(),
+                wallet.getPeriodEnd(),
+                wallet.getNextRenewalDate()
         );
     }
 }

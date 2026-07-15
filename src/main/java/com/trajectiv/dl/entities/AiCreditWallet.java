@@ -51,6 +51,10 @@ public class AiCreditWallet {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
+    @Version
+    @Column(name = "version", nullable = false)
+    private long version;
+
     protected AiCreditWallet() {
     }
 
@@ -61,11 +65,25 @@ public class AiCreditWallet {
             LocalDate periodStart,
             LocalDate periodEnd
     ) {
+        if (user == null) {
+            throw new IllegalArgumentException("User cannot be null.");
+        }
+
+        validateMonthlyLimit(monthlyLimit);
+        validatePeriod(periodStart, periodEnd);
+
+        if (usedThisPeriod < 0 || usedThisPeriod > monthlyLimit) {
+            throw new IllegalArgumentException(
+                    "Used credits must be between zero and monthly limit."
+            );
+        }
+
         this.user = user;
-        this.monthlyLimit = Math.max(0, monthlyLimit);
-        this.usedThisPeriod = Math.max(0, usedThisPeriod);
+        this.monthlyLimit = monthlyLimit;
+        this.usedThisPeriod = usedThisPeriod;
         this.periodStart = periodStart;
         this.periodEnd = periodEnd;
+
         recalculateRemaining();
     }
 
@@ -82,34 +100,92 @@ public class AiCreditWallet {
         );
     }
 
-    public void consume(int amount) {
+    public boolean isPeriodExpired(LocalDate today) {
+        requireDate(today, "today");
+
+        return today.isAfter(periodEnd);
+    }
+
+    public boolean renewPeriodIfExpired(
+            LocalDate today,
+            int monthlyLimit
+    ) {
+        requireDate(today, "today");
+
+        if (!isPeriodExpired(today)) {
+            return false;
+        }
+
+        LocalDate newPeriodStart = today.withDayOfMonth(1);
+        LocalDate newPeriodEnd = newPeriodStart
+                .plusMonths(1)
+                .minusDays(1);
+
+        resetPeriod(
+                monthlyLimit,
+                newPeriodStart,
+                newPeriodEnd
+        );
+
+        return true;
+    }
+
+    public void consume(int amount, LocalDate today) {
+        requireDate(today, "today");
+
         if (amount <= 0) {
-            throw new IllegalArgumentException("Credit amount must be positive.");
+            throw new IllegalArgumentException(
+                    "Credit amount must be strictly positive."
+            );
         }
 
-        if (amount > this.remaining) {
-            throw new IllegalStateException("Not enough AI credits remaining.");
+        if (today.isBefore(periodStart) || today.isAfter(periodEnd)) {
+            throw new IllegalStateException(
+                    "Cannot consume credits outside the active period."
+            );
         }
 
-        this.usedThisPeriod += amount;
+        if (amount > remaining) {
+            throw new IllegalStateException(
+                    "Not enough AI credits remaining."
+            );
+        }
+
+        usedThisPeriod = Math.addExact(usedThisPeriod, amount);
         recalculateRemaining();
     }
 
-    public void resetPeriod(int monthlyLimit, LocalDate periodStart, LocalDate periodEnd) {
-        this.monthlyLimit = Math.max(0, monthlyLimit);
+    private void resetPeriod(
+            int monthlyLimit,
+            LocalDate periodStart,
+            LocalDate periodEnd
+    ) {
+        validateMonthlyLimit(monthlyLimit);
+        validatePeriod(periodStart, periodEnd);
+
+        this.monthlyLimit = monthlyLimit;
         this.usedThisPeriod = 0;
         this.periodStart = periodStart;
         this.periodEnd = periodEnd;
+
         recalculateRemaining();
     }
 
     public void updateMonthlyLimit(int monthlyLimit) {
-        this.monthlyLimit = Math.max(0, monthlyLimit);
+        validateMonthlyLimit(monthlyLimit);
+
+        if (monthlyLimit < usedThisPeriod) {
+            throw new IllegalArgumentException(
+                    "Monthly limit cannot be lower than already used credits."
+            );
+        }
+
+        this.monthlyLimit = monthlyLimit;
         recalculateRemaining();
     }
 
-    private void recalculateRemaining() {
-        this.remaining = Math.max(0, this.monthlyLimit - this.usedThisPeriod);
+    public LocalDate getNextRenewalDate() {
+        return periodEnd.plusDays(1);
     }
 
     @PrePersist
@@ -141,5 +217,54 @@ public class AiCreditWallet {
     protected void onUpdate() {
         this.updatedAt = Instant.now();
         recalculateRemaining();
+    }
+
+    private static void validateMonthlyLimit(int monthlyLimit) {
+        if (monthlyLimit < 0) {
+            throw new IllegalArgumentException(
+                    "Monthly limit cannot be negative."
+            );
+        }
+    }
+
+    private static void validatePeriod(
+            LocalDate periodStart,
+            LocalDate periodEnd
+    ) {
+        requireDate(periodStart, "periodStart");
+        requireDate(periodEnd, "periodEnd");
+
+        if (periodEnd.isBefore(periodStart)) {
+            throw new IllegalArgumentException(
+                    "Period end cannot be before period start."
+            );
+        }
+    }
+
+    private static void requireDate(
+            LocalDate date,
+            String fieldName
+    ) {
+        if (date == null) {
+            throw new IllegalArgumentException(
+                    fieldName + " cannot be null."
+            );
+        }
+    }
+
+    private void recalculateRemaining() {
+        if (usedThisPeriod < 0) {
+            throw new IllegalStateException(
+                    "Used credits cannot be negative."
+            );
+        }
+
+        if (usedThisPeriod > monthlyLimit) {
+            throw new IllegalStateException(
+                    "Used credits cannot exceed the monthly limit."
+            );
+        }
+
+        remaining = monthlyLimit - usedThisPeriod;
     }
 }
