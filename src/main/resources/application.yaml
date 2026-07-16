@@ -17,6 +17,9 @@ spring:
           starttls:
             enable: ${MAIL_TLS:false}
             required: ${MAIL_TLS_REQUIRED:false}
+            connectiontimeout: 5000
+            timeout: 5000
+            writetimeout: 5000
 
   datasource:
     url: ${DATA_URL:jdbc:postgresql://localhost:5434/trajectiv}
