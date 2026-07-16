@@ -4,6 +4,7 @@ import com.trajectiv.bll.dto.access.OrganizationPermission;
 import com.trajectiv.bll.dto.billing.EffectiveEntitlementBllDto;
 import com.trajectiv.dl.enums.organization.OrganizationRole;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
@@ -26,17 +27,24 @@ public record MeWorkspaceBllDto(
             );
         }
 
-        if (kind == null) {
-            throw new IllegalArgumentException(
-                    "Workspace kind cannot be null."
-            );
-        }
+        Objects.requireNonNull(
+                kind,
+                "Workspace kind cannot be null."
+        );
 
         if (label == null || label.isBlank()) {
             throw new IllegalArgumentException(
                     "Workspace label cannot be blank."
             );
         }
+
+        Objects.requireNonNull(
+                plan,
+                "Workspace plan cannot be null."
+        );
+
+        id = id.trim();
+        label = label.trim();
 
         permissions = permissions == null
                 ? Set.of()
@@ -46,40 +54,51 @@ public record MeWorkspaceBllDto(
                 ? Set.of()
                 : Set.copyOf(entitlements);
 
-        validateScope();
+        validateScope(
+                kind,
+                organizationId,
+                organizationRole,
+                permissions
+        );
     }
 
-    private void validateScope() {
-        if (kind == WorkspaceKindBllDto.PERSONAL) {
-            if (
-                    organizationId != null ||
-                            organizationRole != null
-            ) {
-                throw new IllegalArgumentException(
-                        "A personal workspace cannot reference an organization."
-                );
+    private static void validateScope(
+            WorkspaceKindBllDto kind,
+            UUID organizationId,
+            OrganizationRole organizationRole,
+            Set<OrganizationPermission> permissions
+    ) {
+        switch (kind) {
+            case PERSONAL -> {
+                if (
+                        organizationId != null ||
+                                organizationRole != null
+                ) {
+                    throw new IllegalArgumentException(
+                            "A personal workspace cannot reference an organization."
+                    );
+                }
+
+                if (!permissions.isEmpty()) {
+                    throw new IllegalArgumentException(
+                            "A personal workspace cannot expose organization permissions."
+                    );
+                }
             }
 
-            assert permissions != null;
-            if (!permissions.isEmpty()) {
-                throw new IllegalArgumentException(
-                        "A personal workspace cannot expose organization permissions."
-                );
+            case ORGANIZATION -> {
+                if (organizationId == null) {
+                    throw new IllegalArgumentException(
+                            "An organization workspace requires an organization id."
+                    );
+                }
+
+                if (organizationRole == null) {
+                    throw new IllegalArgumentException(
+                            "An organization workspace requires an organization role."
+                    );
+                }
             }
-
-            return;
-        }
-
-        if (organizationId == null) {
-            throw new IllegalArgumentException(
-                    "An organization workspace requires an organization id."
-            );
-        }
-
-        if (organizationRole == null) {
-            throw new IllegalArgumentException(
-                    "An organization workspace requires an organization role."
-            );
         }
     }
 }
