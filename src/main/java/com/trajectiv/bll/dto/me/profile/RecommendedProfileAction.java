@@ -1,0 +1,22 @@
+package com.trajectiv.bll.dto.me.profile;
+
+public enum RecommendedProfileAction {
+    COMPLETE_ONBOARDING,
+
+    CREATE_AVATAR,
+
+    CREATE_FIRST_RESUME,
+    UPLOAD_FIRST_RESUME,
+
+    ADD_FIRST_EXPERIENCE,
+
+    ADD_FIRST_SKILL,
+
+    DEFINE_INTERVIEW_GOAL,
+
+    START_JOB_SEARCH,
+
+    START_INTERVIEW_PREPARATION,
+
+    COMPLETE_PROFILE
+}

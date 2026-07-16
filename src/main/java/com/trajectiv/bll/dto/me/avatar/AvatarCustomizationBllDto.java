@@ -1,6 +1,6 @@
 package com.trajectiv.bll.dto.me.avatar;
 
-import com.trajectiv.dl.enums.*;
+import com.trajectiv.dl.enums.avatar.*;
 
 import java.util.UUID;
 

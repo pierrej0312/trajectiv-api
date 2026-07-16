@@ -1,6 +1,6 @@
 package com.trajectiv.bll.exceptions;
 
-import com.trajectiv.bll.dto.me.OnboardingMissingField;
+import com.trajectiv.bll.dto.me.onboarding.OnboardingMissingField;
 
 import java.util.List;
 

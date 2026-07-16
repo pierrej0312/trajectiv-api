@@ -1,6 +1,6 @@
 package com.trajectiv.bll.dto.me.avatar;
 
-import com.trajectiv.dl.enums.*;
+import com.trajectiv.dl.enums.avatar.*;
 
 public record PatchAvatarCustomizationBllCommand(
         AvatarBodyType bodyType,

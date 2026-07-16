@@ -1,7 +1,12 @@
 package com.trajectiv.api.dto.me;
 
-import com.trajectiv.dl.enums.UserStatus;
+import com.trajectiv.api.dto.me.credit.MeCreditsApiDto;
+import com.trajectiv.api.dto.me.onboarding.MeOnboardingApiDto;
+import com.trajectiv.api.dto.me.profile.MeProfileApiDto;
+import com.trajectiv.api.dto.me.subscription.MeSubscriptionApiDto;
+import com.trajectiv.api.dto.me.workspace.MeWorkspaceApiDto;
 
+import java.util.List;
 import java.util.UUID;
 
 public record MeResponseApiDto(
@@ -13,10 +18,17 @@ public record MeResponseApiDto(
         String lastName,
         String displayName,
         String avatarUrl,
-        UserStatus status,
+        UserStatusApiDto status,
         MeOnboardingApiDto onboarding,
         MeProfileApiDto profile,
         MeSubscriptionApiDto subscription,
-        MeCreditsApiDto credits
+        MeCreditsApiDto credits,
+        List<MeWorkspaceApiDto> workspaces
 ) {
+
+    public MeResponseApiDto {
+        workspaces = workspaces == null
+                ? List.of()
+                : List.copyOf(workspaces);
+    }
 }

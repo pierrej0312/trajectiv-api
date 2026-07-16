@@ -1,17 +1,25 @@
 package com.trajectiv.api.mappers;
 
-import com.trajectiv.api.dto.me.*;
-import com.trajectiv.api.dto.me.avatar.MeAvatarApiDto;
-import com.trajectiv.bll.dto.me.*;
-import com.trajectiv.bll.dto.storage.StoredAvatarBllDto;
+import com.trajectiv.api.dto.me.MeResponseApiDto;
+import com.trajectiv.api.dto.me.UserStatusApiDto;
+import com.trajectiv.bll.dto.me.MeBllDto;
+import com.trajectiv.dl.enums.UserStatus;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
+@RequiredArgsConstructor
 public class MeApiMapper {
 
-    public MeResponseApiDto toApiDto(MeBllDto me) {
+    private final MeProfileApiMapper profileMapper;
+    private final MeOnboardingApiMapper onboardingMapper;
+    private final MeSubscriptionApiMapper subscriptionMapper;
+    private final MeCreditsApiMapper creditsMapper;
+    private final MeWorkspaceApiMapper workspaceMapper;
+
+    public MeResponseApiDto toApiDto(
+            MeBllDto me
+    ) {
         return new MeResponseApiDto(
                 me.user().id(),
                 me.user().keycloakSubject(),
@@ -21,100 +29,37 @@ public class MeApiMapper {
                 me.user().lastName(),
                 me.user().displayName(),
                 me.profile().avatarUrl(),
-                me.user().status(),
-                toOnboardingApiDto(me),
-                toProfileApiDto(me),
-                toSubscriptionApiDto(me),
-                toCreditsApiDto(me)
-        );
-    }
-
-    private MeProfileApiDto toProfileApiDto(MeBllDto me) {
-        return new MeProfileApiDto(
-                me.profile().careerGoal(),
-                me.profile().targetRoleId(),
-                me.profile().targetRoleLabel(),
-                me.profile().targetRoleSource(),
-                me.profile().experienceLevel(),
-                me.profile().preferredLanguage()
-        );
-    }
-
-    private MeOnboardingApiDto toOnboardingApiDto(MeBllDto me) {
-        return new MeOnboardingApiDto(
-                me.onboarding().status(),
-                me.onboarding().completedAt(),
-                me.onboarding().missingFields()
-        );
-    }
-
-    private MeSubscriptionApiDto toSubscriptionApiDto(MeBllDto me) {
-        return new MeSubscriptionApiDto(
-                me.subscription().plan(),
-                me.subscription().status()
-        );
-    }
-
-    private MeCreditsApiDto toCreditsApiDto(MeBllDto me) {
-        return new MeCreditsApiDto(
-                me.credits().monthlyLimit(),
-                me.credits().used(),
-                me.credits().remaining(),
-                me.credits().periodStart(),
-                me.credits().periodEnd(),
-                me.credits().nextRenewalDate()
-        );
-    }
-    public UpdateUserProfileCommandBllDto toBllCommand(UpdateMeProfileRequestApiDto request) {
-        return new UpdateUserProfileCommandBllDto(
-                request.displayName(),
-                request.careerGoal(),
-                request.targetRoleId(),
-                request.targetRoleLabel(),
-                request.targetRoleSource(),
-                request.experienceLevel(),
-                request.preferredLanguage()
-        );
-    }
-
-    public UpdatedMeProfileResponseApiDto toUpdatedProfileApiDto(UpdatedUserProfileBllDto updatedProfile) {
-        return new UpdatedMeProfileResponseApiDto(
-                new MeProfileApiDto(
-                        updatedProfile.profile().careerGoal(),
-                        updatedProfile.profile().targetRoleId(),
-                        updatedProfile.profile().targetRoleLabel(),
-                        updatedProfile.profile().targetRoleSource(),
-                        updatedProfile.profile().experienceLevel(),
-                        updatedProfile.profile().preferredLanguage()
+                mapUserStatus(me.user().status()),
+                onboardingMapper.toApiDto(
+                        me.onboarding()
                 ),
-                new MeOnboardingApiDto(
-                        updatedProfile.onboarding().status(),
-                        updatedProfile.onboarding().completedAt(),
-                        updatedProfile.onboarding().missingFields()
+                profileMapper.toApiDto(
+                        me.profile()
+                ),
+                subscriptionMapper.toApiDto(
+                        me.subscription()
+                ),
+                creditsMapper.toApiDto(
+                        me.credits()
+                ),
+                workspaceMapper.toApiDtos(
+                        me.workspaces()
                 )
         );
     }
 
-    public MeOnboardingApiDto toOnboardingApiDto(MeOnboardingBllDto onboarding) {
-        return new MeOnboardingApiDto(
-                onboarding.status(),
-                onboarding.completedAt(),
-                onboarding.missingFields()
-        );
-    }
+    private UserStatusApiDto mapUserStatus(
+            UserStatus status
+    ) {
+        return switch (status) {
+            case ACTIVE ->
+                    UserStatusApiDto.ACTIVE;
 
-    public MeAvatarApiDto toAvatarApiDto(StoredAvatarBllDto avatar) {
-        return new MeAvatarApiDto(
-                avatar.fileId(),
-                avatar.avatarUrl()
-        );
-    }
+            case DISABLED ->
+                    UserStatusApiDto.DISABLED;
 
-    public ProfileCompletionResponseApiDto toProfileCompletionApiDto(ProfileCompletionResponseBllDto profileCompletion) {
-        return new ProfileCompletionResponseApiDto(
-                profileCompletion.completionPercentage(),
-                profileCompletion.missingFields(),
-                profileCompletion.recommendedActions()
-        );
+            case DELETED ->
+                    UserStatusApiDto.DELETED;
+        };
     }
 }

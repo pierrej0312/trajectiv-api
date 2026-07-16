@@ -21,5 +21,21 @@ public final class ApiRoutes {
         public static final String OPPORTUNITIES = API_V1 + "/opportunities";
 
         public static final String JOB_ROLES = API_V1 + "/job-roles";
+
+        public static final String ORGANIZATIONS =
+                API_V1 + "/organizations";
+
+        public static final String ORGANIZATION_BY_ID =
+                ORGANIZATIONS + "/{organizationId}";
+
+        public static final String ORGANIZATION_INVITATIONS =
+                ORGANIZATIONS
+                        + "/{organizationId}/invitations";
+
+        public static final String ORGANIZATION_INVITATION_ACCEPTANCE =
+                API_V1 + "/organization-invitations";
+
+        public static final String ORGANIZATION_MEMBERS =
+                ORGANIZATION_BY_ID + "/members";
     }
 }

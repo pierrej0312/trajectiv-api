@@ -1,11 +1,9 @@
 package com.trajectiv.bll.mappers;
 
-import com.trajectiv.bll.dto.me.UserProfileBllDto;
+import com.trajectiv.bll.dto.me.profile.UserProfileBllDto;
 import com.trajectiv.dl.entities.JobRole;
 import com.trajectiv.dl.entities.UserProfile;
 import org.springframework.stereotype.Component;
-
-import java.util.UUID;
 
 @Component
 public class UserProfileBllMapper {

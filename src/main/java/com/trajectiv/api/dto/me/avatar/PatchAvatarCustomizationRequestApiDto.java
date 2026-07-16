@@ -1,6 +1,6 @@
 package com.trajectiv.api.dto.me.avatar;
 
-import com.trajectiv.dl.enums.*;
+import com.trajectiv.dl.enums.avatar.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;

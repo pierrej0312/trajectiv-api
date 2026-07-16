@@ -1,11 +1,11 @@
 package com.trajectiv.bll.services.profile;
 
-import com.trajectiv.bll.dto.me.UpdateUserProfileCommandBllDto;
-import com.trajectiv.bll.dto.me.UpdatedUserProfileBllDto;
+import com.trajectiv.bll.dto.me.profile.UpdateUserProfileCommandBllDto;
+import com.trajectiv.bll.dto.me.profile.UpdatedUserProfileBllDto;
 import com.trajectiv.bll.exceptions.BusinessErrorCode;
 import com.trajectiv.bll.exceptions.UserContextInitializationException;
 import com.trajectiv.bll.mappers.UserProfileBllMapper;
-import com.trajectiv.bll.services.me.UserSyncService;
+import com.trajectiv.bll.services.me.sync.UserSyncService;
 import com.trajectiv.bll.services.onboarding.OnboardingService;
 import com.trajectiv.dl.entities.JobRole;
 import com.trajectiv.dl.entities.User;

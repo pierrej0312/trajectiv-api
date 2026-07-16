@@ -1,14 +1,14 @@
 package com.trajectiv.bll.mappers;
 
-import com.trajectiv.bll.dto.me.AiCreditWalletBllDto;
-import com.trajectiv.dl.entities.AiCreditWallet;
+import com.trajectiv.bll.dto.credits.UserAiCreditWalletBllDto;
+import com.trajectiv.dl.entities.credits.AiCreditWallet;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AiCreditBllMapper {
 
-    public AiCreditWalletBllDto toDto(AiCreditWallet wallet) {
-        return new AiCreditWalletBllDto(
+    public UserAiCreditWalletBllDto toDto(AiCreditWallet wallet) {
+        return new UserAiCreditWalletBllDto(
                 wallet.getMonthlyLimit(),
                 wallet.getUsedThisPeriod(),
                 wallet.getRemaining(),

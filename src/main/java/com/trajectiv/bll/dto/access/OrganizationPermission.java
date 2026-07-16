@@ -1,0 +1,21 @@
+package com.trajectiv.bll.dto.access;
+
+public enum OrganizationPermission {
+    ORGANIZATION_READ,
+    ORGANIZATION_UPDATE,
+    ORGANIZATION_ARCHIVE,
+
+    MEMBER_READ,
+    MEMBER_INVITE,
+    MEMBER_UPDATE_ROLE,
+    MEMBER_SUSPEND,
+    MEMBER_REMOVE,
+
+    COHORT_READ,
+    COHORT_MANAGE,
+
+    LEARNER_READ,
+    TRAINING_ASSIGN,
+
+    REPORT_READ
+}

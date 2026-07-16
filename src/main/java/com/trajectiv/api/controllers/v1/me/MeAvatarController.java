@@ -6,6 +6,7 @@ import com.trajectiv.api.dto.me.avatar.MeAvatarApiDto;
 import com.trajectiv.api.dto.me.avatar.PatchAvatarCustomizationRequestApiDto;
 import com.trajectiv.api.mappers.AvatarCustomizationApiMapper;
 import com.trajectiv.api.mappers.MeApiMapper;
+import com.trajectiv.api.mappers.MeAvatarApiMapper;
 import com.trajectiv.api.routes.ApiRoutes;
 import com.trajectiv.bll.dto.storage.StoredAvatarBllDto;
 import com.trajectiv.bll.services.me.avatar.AvatarCustomizationService;
@@ -35,7 +36,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MeAvatarController {
 
     private final AvatarStorageService avatarStorageService;
-    private final MeApiMapper meApiMapper;
+    private final MeAvatarApiMapper meAvatarApiMapper;
     private final AvatarCustomizationService avatarCustomizationService;
     private final AvatarCustomizationApiMapper avatarCustomizationApiMapper;
 
@@ -64,7 +65,9 @@ public class MeAvatarController {
                 file
         );
 
-        return ResponseEntity.ok(meApiMapper.toAvatarApiDto(avatar));
+        return ResponseEntity.ok(
+                meAvatarApiMapper.toApiDto(avatar)
+        );
     }
 
     @DeleteMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -78,7 +81,9 @@ public class MeAvatarController {
     public ResponseEntity<MeAvatarApiDto> deleteAvatar(Authentication authentication) {
         StoredAvatarBllDto avatar = avatarStorageService.deleteCurrentUserAvatar(authentication);
 
-        return ResponseEntity.ok(meApiMapper.toAvatarApiDto(avatar));
+        return ResponseEntity.ok(
+                meAvatarApiMapper.toApiDto(avatar)
+        );
     }
 
     @PostMapping(

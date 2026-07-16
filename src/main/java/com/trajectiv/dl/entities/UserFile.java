@@ -1,7 +1,7 @@
 package com.trajectiv.dl.entities;
 
-import com.trajectiv.dl.enums.FileStatus;
-import com.trajectiv.dl.enums.UserFileKind;
+import com.trajectiv.dl.enums.file.FileStatus;
+import com.trajectiv.dl.enums.file.UserFileKind;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.ToString;

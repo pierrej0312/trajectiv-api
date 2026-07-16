@@ -1,7 +1,7 @@
 package com.trajectiv.bll.services.subscription.policy;
 
-import com.trajectiv.dl.enums.SubscriptionPlan;
-import com.trajectiv.dl.enums.SubscriptionStatus;
+import com.trajectiv.dl.enums.billing.SubscriptionPlan;
+import com.trajectiv.dl.enums.billing.SubscriptionStatus;
 import org.springframework.stereotype.Component;
 
 @Component

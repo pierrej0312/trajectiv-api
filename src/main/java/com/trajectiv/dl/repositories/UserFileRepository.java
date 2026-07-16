@@ -1,8 +1,8 @@
 package com.trajectiv.dl.repositories;
 
 import com.trajectiv.dl.entities.UserFile;
-import com.trajectiv.dl.enums.FileStatus;
-import com.trajectiv.dl.enums.UserFileKind;
+import com.trajectiv.dl.enums.file.FileStatus;
+import com.trajectiv.dl.enums.file.UserFileKind;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

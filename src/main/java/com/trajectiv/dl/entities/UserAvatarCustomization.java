@@ -1,6 +1,6 @@
 package com.trajectiv.dl.entities;
 
-import com.trajectiv.dl.enums.*;
+import com.trajectiv.dl.enums.avatar.*;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package com.trajectiv.bll.services.onboarding;
 
-import com.trajectiv.bll.dto.me.MeOnboardingBllDto;
-import com.trajectiv.bll.dto.me.OnboardingMissingField;
+import com.trajectiv.bll.dto.me.onboarding.MeOnboardingBllDto;
+import com.trajectiv.bll.dto.me.onboarding.OnboardingMissingField;
 import com.trajectiv.dl.entities.UserProfile;
 import org.springframework.security.core.Authentication;
 

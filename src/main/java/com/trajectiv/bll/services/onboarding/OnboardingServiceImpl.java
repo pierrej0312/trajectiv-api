@@ -1,11 +1,11 @@
 package com.trajectiv.bll.services.onboarding;
 
-import com.trajectiv.bll.dto.me.MeOnboardingBllDto;
-import com.trajectiv.bll.dto.me.OnboardingMissingField;
+import com.trajectiv.bll.dto.me.onboarding.MeOnboardingBllDto;
+import com.trajectiv.bll.dto.me.onboarding.OnboardingMissingField;
 import com.trajectiv.bll.exceptions.BusinessErrorCode;
 import com.trajectiv.bll.exceptions.OnboardingRequiredFieldsMissingException;
 import com.trajectiv.bll.exceptions.UserContextInitializationException;
-import com.trajectiv.bll.services.me.UserSyncService;
+import com.trajectiv.bll.services.me.sync.UserSyncService;
 import com.trajectiv.dl.entities.User;
 import com.trajectiv.dl.entities.UserProfile;
 import com.trajectiv.dl.enums.OnboardingStatus;

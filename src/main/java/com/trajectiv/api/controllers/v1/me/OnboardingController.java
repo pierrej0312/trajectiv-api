@@ -1,10 +1,10 @@
 package com.trajectiv.api.controllers.v1.me;
 
 
-import com.trajectiv.api.dto.me.MeOnboardingApiDto;
-import com.trajectiv.api.mappers.MeApiMapper;
+import com.trajectiv.api.dto.me.onboarding.MeOnboardingApiDto;
+import com.trajectiv.api.mappers.MeOnboardingApiMapper;
 import com.trajectiv.api.routes.ApiRoutes;
-import com.trajectiv.bll.dto.me.MeOnboardingBllDto;
+import com.trajectiv.bll.dto.me.onboarding.MeOnboardingBllDto;
 import com.trajectiv.bll.services.onboarding.OnboardingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -27,13 +27,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class OnboardingController {
 
     private final OnboardingService onboardingService;
-    private final MeApiMapper meApiMapper;
+    private final MeOnboardingApiMapper onboardingApiMapper;
 
     @PostMapping("/complete")
     @Operation(summary = "Complete current user onboarding")
     public ResponseEntity<MeOnboardingApiDto> completeOnboarding(Authentication authentication) {
         MeOnboardingBllDto onboarding = onboardingService.completeCurrentUserOnboarding(authentication);
 
-        return ResponseEntity.ok(meApiMapper.toOnboardingApiDto(onboarding));
+        return ResponseEntity.ok(onboardingApiMapper.toApiDto(onboarding));
     }
 }
