@@ -8,6 +8,7 @@ public enum OrganizationPermission {
     MEMBER_READ,
     MEMBER_INVITE,
     MEMBER_UPDATE_ROLE,
+    MEMBER_UPDATE_STATUS,
     MEMBER_SUSPEND,
     MEMBER_REMOVE,
 

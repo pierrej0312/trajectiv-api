@@ -77,6 +77,8 @@ springdoc:
     oauth:
       client-id: trajectiv-web
       use-pkce-with-authorization-code-grant: true
+      additional-query-string-params:
+        prompt: login
 
 trajectiv:
   cors:

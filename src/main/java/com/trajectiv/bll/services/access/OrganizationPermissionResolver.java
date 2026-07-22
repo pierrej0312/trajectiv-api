@@ -38,6 +38,8 @@ public class OrganizationPermissionResolver {
                                             .MEMBER_INVITE,
                                     OrganizationPermission
                                             .MEMBER_UPDATE_ROLE,
+                                    OrganizationPermission.
+                                            MEMBER_UPDATE_STATUS,
                                     OrganizationPermission
                                             .MEMBER_SUSPEND,
                                     OrganizationPermission

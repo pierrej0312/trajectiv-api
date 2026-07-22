@@ -36,6 +36,6 @@ public final class ApiRoutes {
                 API_V1 + "/organization-invitations";
 
         public static final String ORGANIZATION_MEMBERS =
-                ORGANIZATION_BY_ID + "/members";
+                ORGANIZATIONS + "/{organizationId}/members";
     }
 }

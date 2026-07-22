@@ -152,23 +152,47 @@ public class OrganizationMember {
         }
 
         this.role = requireRole(role);
+        this.updatedAt = Instant.now();
     }
 
     public void suspend() {
+        if (
+                this.status !=
+                        OrganizationMemberStatus.ACTIVE
+        ) {
+            throw new IllegalStateException(
+                    "Only an active organization member can be suspended."
+            );
+        }
+
         this.status =
                 OrganizationMemberStatus.SUSPENDED;
     }
 
     public void reactivate() {
+        if (
+                this.status !=
+                        OrganizationMemberStatus.SUSPENDED
+        ) {
+            throw new IllegalStateException(
+                    "Only a suspended organization member can be reactivated."
+            );
+        }
+
         this.status =
                 OrganizationMemberStatus.ACTIVE;
-
-        if (this.joinedAt == null) {
-            this.joinedAt = Instant.now();
-        }
     }
 
     public void remove() {
+        if (
+                this.status ==
+                        OrganizationMemberStatus.REMOVED
+        ) {
+            throw new IllegalStateException(
+                    "Organization member is already removed."
+            );
+        }
+
         this.status =
                 OrganizationMemberStatus.REMOVED;
     }
