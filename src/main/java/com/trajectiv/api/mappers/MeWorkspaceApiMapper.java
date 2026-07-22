@@ -132,6 +132,9 @@ public class MeWorkspaceApiMapper {
             case MEMBER_UPDATE_ROLE ->
                     OrganizationPermissionApiDto.MEMBER_UPDATE_ROLE;
 
+            case MEMBER_UPDATE_STATUS ->
+                    OrganizationPermissionApiDto.MEMBER_UPDATE_STATUS;
+
             case MEMBER_SUSPEND ->
                     OrganizationPermissionApiDto.MEMBER_SUSPEND;
 

@@ -8,6 +8,7 @@ import com.trajectiv.bll.mappers.organization.OrganizationMemberBllMapper;
 import com.trajectiv.bll.services.access.OrganizationAccessService;
 import com.trajectiv.bll.services.organization.member.policy.OrganizationMemberLifecyclePolicy;
 import com.trajectiv.bll.services.organization.member.policy.OrganizationMemberRolePolicy;
+import com.trajectiv.dl.entities.User;
 import com.trajectiv.dl.entities.organization.OrganizationMember;
 import com.trajectiv.dl.enums.organization.OrganizationMemberStatus;
 import com.trajectiv.dl.enums.organization.OrganizationRole;
@@ -159,12 +160,16 @@ class OrganizationMemberServiceImplTest {
         UUID currentUserId = UUID.randomUUID();
         UUID organizationId = UUID.randomUUID();
         UUID memberId = UUID.randomUUID();
+        UUID memberUserId = UUID.randomUUID();
 
         OrganizationMember actor =
                 mock(OrganizationMember.class);
 
         OrganizationMember target =
                 mock(OrganizationMember.class);
+
+        User targetUser =
+                mock(User.class);
 
         UpdateOrganizationMemberRoleBllCommand command =
                 new UpdateOrganizationMemberRoleBllCommand(
@@ -197,6 +202,16 @@ class OrganizationMemberServiceImplTest {
         when(target.getRole())
                 .thenReturn(
                         OrganizationRole.TRAINER
+                );
+
+        when(target.getUser())
+                .thenReturn(
+                        targetUser
+                );
+
+        when(targetUser.getId())
+                .thenReturn(
+                        memberUserId
                 );
 
         when(

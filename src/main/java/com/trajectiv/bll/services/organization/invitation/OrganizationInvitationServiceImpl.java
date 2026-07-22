@@ -1,12 +1,13 @@
 package com.trajectiv.bll.services.organization.invitation;
 
 import com.trajectiv.bll.dto.access.OrganizationPermission;
+import com.trajectiv.bll.dto.audit.InvitationCreationReason;
 import com.trajectiv.bll.dto.notification.OrganizationInvitationEmailBllDto;
 import com.trajectiv.bll.dto.organization.invitation.AcceptOrganizationInvitationBllCommand;
 import com.trajectiv.bll.dto.organization.invitation.CreateOrganizationInvitationBllCommand;
 import com.trajectiv.bll.dto.organization.invitation.OrganizationInvitationAcceptanceBllDto;
 import com.trajectiv.bll.dto.organization.invitation.OrganizationInvitationBllDto;
-import com.trajectiv.bll.events.organization.OrganizationInvitationCreatedEvent;
+import com.trajectiv.bll.events.organization.*;
 import com.trajectiv.bll.exceptions.*;
 import com.trajectiv.bll.mappers.organization.OrganizationInvitationBllMapper;
 import com.trajectiv.bll.services.access.OrganizationAccessService;
@@ -17,6 +18,7 @@ import com.trajectiv.dl.entities.organization.OrganizationInvitation;
 import com.trajectiv.dl.entities.organization.OrganizationMember;
 import com.trajectiv.dl.enums.organization.OrganizationInvitationStatus;
 import com.trajectiv.dl.enums.organization.OrganizationMemberStatus;
+import com.trajectiv.dl.enums.organization.OrganizationRole;
 import com.trajectiv.dl.repositories.UserRepository;
 import com.trajectiv.dl.repositories.organization.OrganizationInvitationRepository;
 import com.trajectiv.dl.repositories.organization.OrganizationMemberRepository;
@@ -113,7 +115,8 @@ public class OrganizationInvitationServiceImpl
         return createInvitation(
                 inviter,
                 organization,
-                command
+                command,
+                InvitationCreationReason.INITIAL
         );
     }
 
@@ -193,6 +196,16 @@ public class OrganizationInvitationServiceImpl
 
         invitation.accept(user, now);
 
+        eventPublisher.publishEvent(
+                new OrganizationInvitationAcceptedEvent(
+                        invitation.getOrganization().getId(),
+                        currentUserId,
+                        invitation.getId(),
+                        membership.getId(),
+                        membership.getRole()
+                )
+        );
+
         return new OrganizationInvitationAcceptanceBllDto(
                 invitation.getId(),
                 invitation.getOrganization().getId(),
@@ -231,10 +244,29 @@ public class OrganizationInvitationServiceImpl
                         invitationId
                 );
 
+        String invitedEmail =
+                invitation.getEmail();
+
+        OrganizationRole role =
+                invitation.getRole();
+
+        Instant revokedAt =
+                Instant.now(clock);
+
         validatePendingInvitation(invitation);
 
         invitation.revoke(
-                Instant.now(clock)
+                revokedAt
+        );
+
+        eventPublisher.publishEvent(
+                new OrganizationInvitationRevokedEvent(
+                        organizationId,
+                        currentUserId,
+                        invitation.getId(),
+                        invitedEmail,
+                        role
+                )
         );
     }
 
@@ -276,7 +308,9 @@ public class OrganizationInvitationServiceImpl
         );
 
         User inviter =
-                getRequiredUser(currentUserId);
+                getRequiredUser(
+                        currentUserId
+                );
 
         CreateOrganizationInvitationBllCommand command =
                 new CreateOrganizationInvitationBllCommand(
@@ -284,17 +318,33 @@ public class OrganizationInvitationServiceImpl
                         previousInvitation.getRole()
                 );
 
-        return createInvitation(
-                inviter,
-                previousInvitation.getOrganization(),
-                command
+        OrganizationInvitationBllDto newInvitation =
+                createInvitation(
+                        inviter,
+                        previousInvitation.getOrganization(),
+                        command,
+                        InvitationCreationReason.RESEND
+                );
+
+        eventPublisher.publishEvent(
+                new OrganizationInvitationResentEvent(
+                        organizationId,
+                        currentUserId,
+                        previousInvitation.getId(),
+                        newInvitation.id(),
+                        newInvitation.email(),
+                        newInvitation.role()
+                )
         );
+
+        return newInvitation;
     }
 
     private OrganizationInvitationBllDto createInvitation(
             User inviter,
             Organization organization,
-            CreateOrganizationInvitationBllCommand command
+            CreateOrganizationInvitationBllCommand command,
+            InvitationCreationReason reason
     ) {
         ensureNoPendingInvitation(
                 organization.getId(),
@@ -327,6 +377,20 @@ public class OrganizationInvitationServiceImpl
                 invitationRepository.save(
                         invitation
                 );
+
+        if (
+                reason == InvitationCreationReason.INITIAL
+        ) {
+            eventPublisher.publishEvent(
+                    new OrganizationInvitationAuditCreatedEvent(
+                            organization.getId(),
+                            inviter.getId(),
+                            savedInvitation.getId(),
+                            savedInvitation.getEmail(),
+                            savedInvitation.getRole()
+                    )
+            );
+        }
 
         publishEmailEvent(
                 savedInvitation,
