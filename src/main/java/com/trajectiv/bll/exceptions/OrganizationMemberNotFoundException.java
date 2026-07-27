@@ -1,9 +1,12 @@
 package com.trajectiv.bll.exceptions;
 
+import lombok.Getter;
+
 import java.util.UUID;
 
+@Getter
 public class OrganizationMemberNotFoundException
-        extends RuntimeException {
+        extends BusinessException {
 
     private final UUID memberId;
     private final UUID organizationId;
@@ -13,22 +16,12 @@ public class OrganizationMemberNotFoundException
             UUID organizationId
     ) {
         super(
+                BusinessErrorCode.ORGANIZATION_MEMBER_NOT_FOUND,
                 "Organization member %s was not found in organization %s."
-                        .formatted(
-                                memberId,
-                                organizationId
-                        )
+                        .formatted(memberId, organizationId)
         );
-
         this.memberId = memberId;
         this.organizationId = organizationId;
     }
 
-    public UUID getMemberId() {
-        return memberId;
-    }
-
-    public UUID getOrganizationId() {
-        return organizationId;
-    }
 }

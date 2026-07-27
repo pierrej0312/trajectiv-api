@@ -22,16 +22,26 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
-            Converter<Jwt, ? extends AbstractAuthenticationToken> jwtAuthenticationConverter
+            Converter<Jwt, ? extends AbstractAuthenticationToken>
+                    jwtAuthenticationConverter,
+            ApiAuthenticationEntryPoint authenticationEntryPoint,
+            ApiAccessDeniedHandler accessDeniedHandler
     ) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .sessionManagement(session ->
-                        session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                        session.sessionCreationPolicy(
+                                SessionCreationPolicy.STATELESS
+                        )
+                )
+                .exceptionHandling(exceptions -> exceptions
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler)
                 )
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**")
+                        .permitAll()
 
                         .requestMatchers(
                                 "/actuator/health",
@@ -45,17 +55,23 @@ public class SecurityConfig {
                                 "/v3/api-docs.yaml",
 
                                 "/files/**"
-                        ).permitAll()
-
-                        .requestMatchers("/v1/me", "/v1/me/**").authenticated()
-                        .requestMatchers("/v1/security/**").authenticated()
-
-                        .anyRequest().authenticated()
-                )
-                .oauth2ResourceServer(oauth ->
-                        oauth.jwt(jwt ->
-                                jwt.jwtAuthenticationConverter(jwtAuthenticationConverter)
                         )
+                        .permitAll()
+
+                        .requestMatchers("/v1/me", "/v1/me/**")
+                        .authenticated()
+                        .requestMatchers("/v1/security/**")
+                        .authenticated()
+
+                        .anyRequest()
+                        .authenticated()
+                )
+                .oauth2ResourceServer(oauth -> oauth
+                        .authenticationEntryPoint(authenticationEntryPoint)
+                        .accessDeniedHandler(accessDeniedHandler)
+                        .jwt(jwt -> jwt.jwtAuthenticationConverter(
+                                jwtAuthenticationConverter
+                        ))
                 )
                 .build();
     }

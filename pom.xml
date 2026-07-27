@@ -29,6 +29,8 @@
     <properties>
         <java.version>21</java.version>
 <!--        <kotlin.version>2.2.20</kotlin.version>-->
+        <pdfbox.version>3.0.8</pdfbox.version>
+        <json-schema-validator.version>2.0.4</json-schema-validator.version>
     </properties>
     <dependencies>
         <dependency>
@@ -146,6 +148,23 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-jackson2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>${pdfbox.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.networknt</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>${json-schema-validator.version}</version>
         </dependency>
     </dependencies>
 

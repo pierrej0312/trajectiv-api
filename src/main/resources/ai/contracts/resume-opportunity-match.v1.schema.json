@@ -1,0 +1,758 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.trajectiv.app/ai/resume-opportunity-match.v1.schema.json",
+  "title": "Trajectiv Resume Opportunity Match v1",
+  "description": "Grounded comparison between a resume analysis and an opportunity analysis. Coverage is not an interview probability.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "promptVersion",
+    "status",
+    "resumeAnalysisId",
+    "opportunityAnalysisId",
+    "recommendation",
+    "summary",
+    "requirementCoverage",
+    "requirementMatches",
+    "atsFit",
+    "recruiterFit",
+    "criticalGaps",
+    "priorityChanges",
+    "unknowns",
+    "warnings"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "resume-opportunity-match.v1"
+    },
+    "promptVersion": {
+      "const": "resume-opportunity-match.v1"
+    },
+    "status": {
+      "$ref": "#/$defs/analysisStatus"
+    },
+    "resumeAnalysisId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "opportunityAnalysisId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "recommendation": {
+      "type": "string",
+      "enum": [
+        "APPLY_AS_IS",
+        "TAILOR_BEFORE_APPLYING",
+        "LOW_PRIORITY",
+        "DATA_INSUFFICIENT"
+      ]
+    },
+    "summary": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "maxLength": 3000
+    },
+    "requirementCoverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "coveragePercent",
+        "totalRequirements",
+        "evaluableRequirements",
+        "matched",
+        "partial",
+        "missing",
+        "unknown",
+        "mandatory",
+        "preferred",
+        "contextual",
+        "calculationMethod"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/controlStatus"
+        },
+        "coveragePercent": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "totalRequirements": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "evaluableRequirements": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "matched": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "partial": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missing": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unknown": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "mandatory": {
+          "$ref": "#/$defs/countSet"
+        },
+        "preferred": {
+          "$ref": "#/$defs/countSet"
+        },
+        "contextual": {
+          "$ref": "#/$defs/countSet"
+        },
+        "calculationMethod": {
+          "const": "MATCHED_1_PARTIAL_0_5_MISSING_0_UNKNOWN_EXCLUDED"
+        }
+      }
+    },
+    "requirementMatches": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/requirementMatch"
+      },
+      "maxItems": 150
+    },
+    "atsFit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "keywordCoveragePercent",
+        "matchedKeywords",
+        "missingKeywords",
+        "parsingRisks",
+        "limitations"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/controlStatus"
+        },
+        "keywordCoveragePercent": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 100
+        },
+        "matchedKeywords": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "uniqueItems": true,
+          "maxItems": 100
+        },
+        "missingKeywords": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "uniqueItems": true,
+          "maxItems": 100
+        },
+        "parsingRisks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          },
+          "maxItems": 50
+        },
+        "limitations": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 800
+          },
+          "maxItems": 30
+        }
+      }
+    },
+    "recruiterFit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "twentySecondVerdict",
+        "targetClarity",
+        "relevanceVisibility",
+        "evidenceStrength",
+        "seniorityCoherence",
+        "strongestEvidence",
+        "mainConcerns"
+      ],
+      "properties": {
+        "status": {
+          "$ref": "#/$defs/controlStatus"
+        },
+        "twentySecondVerdict": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 2500
+        },
+        "targetClarity": {
+          "$ref": "#/$defs/assessmentLevel"
+        },
+        "relevanceVisibility": {
+          "$ref": "#/$defs/assessmentLevel"
+        },
+        "evidenceStrength": {
+          "$ref": "#/$defs/assessmentLevel"
+        },
+        "seniorityCoherence": {
+          "$ref": "#/$defs/assessmentLevel"
+        },
+        "strongestEvidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fitInsight"
+          },
+          "maxItems": 15
+        },
+        "mainConcerns": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/fitInsight"
+          },
+          "maxItems": 15
+        }
+      }
+    },
+    "criticalGaps": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/gap"
+      },
+      "maxItems": 30
+    },
+    "priorityChanges": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/priorityChange"
+      },
+      "maxItems": 20
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unknownItem"
+      },
+      "maxItems": 100
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/warning"
+      },
+      "maxItems": 100
+    }
+  },
+  "$defs": {
+    "analysisStatus": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "PARTIAL",
+        "FAILED"
+      ]
+    },
+    "controlStatus": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "WARNING",
+        "FAIL",
+        "UNKNOWN"
+      ]
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ]
+    },
+    "assessmentLevel": {
+      "type": "string",
+      "enum": [
+        "STRONG",
+        "ADEQUATE",
+        "WEAK",
+        "UNKNOWN"
+      ]
+    },
+    "unknownReason": {
+      "type": "string",
+      "enum": [
+        "SOURCE_NOT_PROVIDED",
+        "EXTRACTION_PARTIAL",
+        "AMBIGUOUS_WORDING",
+        "CONFLICTING_INFORMATION",
+        "INSUFFICIENT_CONTEXT",
+        "MODEL_UNCERTAIN"
+      ]
+    },
+    "resumeEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "page",
+        "excerpt"
+      ],
+      "properties": {
+        "source": {
+          "const": "RESUME"
+        },
+        "page": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "excerpt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 700
+        }
+      }
+    },
+    "opportunityEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "section",
+        "excerpt"
+      ],
+      "properties": {
+        "source": {
+          "const": "OPPORTUNITY"
+        },
+        "section": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160
+        },
+        "excerpt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 700
+        }
+      }
+    },
+    "warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "severity",
+        "path",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{2,63}$"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "INFO",
+            "WARNING",
+            "ERROR"
+          ]
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 240
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "unknownItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "path",
+        "reason",
+        "details"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{2,63}$"
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 240
+        },
+        "reason": {
+          "$ref": "#/$defs/unknownReason"
+        },
+        "details": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "countSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "matched",
+        "partial",
+        "missing",
+        "unknown"
+      ],
+      "properties": {
+        "matched": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "partial": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "missing": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "unknown": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "requirementMatch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requirementId",
+        "status",
+        "matchBasis",
+        "explanation",
+        "resumeEvidence",
+        "opportunityEvidence",
+        "confidence",
+        "unknownReason"
+      ],
+      "properties": {
+        "requirementId": {
+          "type": "string",
+          "pattern": "^REQ-\\d{3}$"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "MATCHED",
+            "PARTIAL",
+            "MISSING",
+            "UNKNOWN"
+          ]
+        },
+        "matchBasis": {
+          "type": "string",
+          "enum": [
+            "PROFESSIONAL_EXPERIENCE",
+            "PROJECT",
+            "TRAINING",
+            "EDUCATION",
+            "CERTIFICATION",
+            "ADJACENT_SKILL",
+            "KEYWORD_ONLY",
+            "NONE",
+            "UNKNOWN"
+          ]
+        },
+        "explanation": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1800
+        },
+        "resumeEvidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/resumeEvidence"
+          },
+          "maxItems": 20
+        },
+        "opportunityEvidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/opportunityEvidence"
+          },
+          "minItems": 1,
+          "maxItems": 20
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "unknownReason": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/unknownReason"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "MATCHED"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resumeEvidence": {
+                "minItems": 1
+              },
+              "unknownReason": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "PARTIAL"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resumeEvidence": {
+                "minItems": 1
+              },
+              "unknownReason": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "MISSING"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "resumeEvidence": {
+                "maxItems": 0
+              },
+              "matchBasis": {
+                "const": "NONE"
+              },
+              "unknownReason": {
+                "type": "null"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "UNKNOWN"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "unknownReason": {
+                "$ref": "#/$defs/unknownReason"
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "unknownReason": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "fitInsight": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "label",
+        "details",
+        "relatedRequirementIds",
+        "resumeEvidence"
+      ],
+      "properties": {
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 180
+        },
+        "details": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1500
+        },
+        "relatedRequirementIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^REQ-\\d{3}$"
+          },
+          "uniqueItems": true,
+          "maxItems": 20
+        },
+        "resumeEvidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/resumeEvidence"
+          },
+          "maxItems": 20
+        }
+      }
+    },
+    "gap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "priority",
+        "title",
+        "details",
+        "relatedRequirementIds"
+      ],
+      "properties": {
+        "priority": {
+          "type": "string",
+          "enum": [
+            "CRITICAL",
+            "HIGH",
+            "MEDIUM",
+            "LOW"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 220
+        },
+        "details": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1500
+        },
+        "relatedRequirementIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^REQ-\\d{3}$"
+          },
+          "uniqueItems": true,
+          "maxItems": 20
+        }
+      }
+    },
+    "priorityChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "priority",
+        "title",
+        "rationale",
+        "relatedRequirementIds"
+      ],
+      "properties": {
+        "priority": {
+          "type": "string",
+          "enum": [
+            "HIGH",
+            "MEDIUM",
+            "LOW"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 220
+        },
+        "rationale": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1800
+        },
+        "relatedRequirementIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^REQ-\\d{3}$"
+          },
+          "uniqueItems": true,
+          "maxItems": 20
+        }
+      }
+    }
+  }
+}

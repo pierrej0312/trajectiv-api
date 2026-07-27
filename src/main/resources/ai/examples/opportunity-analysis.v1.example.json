@@ -1,0 +1,504 @@
+{
+  "schemaVersion": "opportunity-analysis.v1",
+  "promptVersion": "opportunity-extract.v1",
+  "status": "COMPLETED",
+  "source": {
+    "inputType": "MANUAL_TEXT",
+    "sourceUrl": null,
+    "rawTextHash": "8048a2f981c353e4a705c5c554a893ef073e8f4fa6477f06b1134c53cd6982ad"
+  },
+  "identity": {
+    "title": {
+      "value": "Développeur·se Frontend / Fullstack Junior — Angular / Java",
+      "provenance": "INFERRED",
+      "confidence": "MEDIUM",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Introduction",
+          "excerpt": "Tu sors d’une formation en développement ou tu as déjà une première expérience ?"
+        },
+        {
+          "source": "OPPORTUNITY",
+          "section": "Stack",
+          "excerpt": "Une stack moderne : Angular, Java, MongoDB – tu maîtriseras rapidement le fullstack si tu le désires."
+        }
+      ]
+    },
+    "company": {
+      "value": "Amarris Tech",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Introduction",
+          "excerpt": "Chez Amarris Tech, on te propose de monter en compétences dans une équipe bienveillante"
+        }
+      ]
+    },
+    "location": {
+      "value": null,
+      "provenance": "UNKNOWN",
+      "confidence": "LOW",
+      "evidence": []
+    },
+    "remotePolicy": {
+      "value": "Télétravail partiel possible",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce qu’on t’offre",
+          "excerpt": "Télétravail partiel possible, horaires flexibles."
+        }
+      ]
+    },
+    "employmentType": {
+      "value": "CDI",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce qu’on t’offre",
+          "excerpt": "CDI avec package compétitif."
+        }
+      ]
+    },
+    "seniority": {
+      "value": "Junior / début de carrière",
+      "provenance": "INFERRED",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Introduction",
+          "excerpt": "Tu sors d’une formation en développement ou tu as déjà une première expérience ?"
+        },
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce que tu feras",
+          "excerpt": "Développer des fonctionnalités web encadré·e par des développeurs expérimentés."
+        }
+      ]
+    }
+  },
+  "summary": {
+    "value": "Poste junior encadré dans une équipe Angular/Java/MongoDB, avec mentoring, code review, pair programming et perspectives de progression vers le full stack.",
+    "provenance": "INFERRED",
+    "confidence": "HIGH",
+    "evidence": [
+      {
+        "source": "OPPORTUNITY",
+        "section": "Ce que tu vas trouver chez nous",
+        "excerpt": "Un accompagnement solide : mentoring, code reviews, pair programming – on t’aide à progresser vite et bien"
+      },
+      {
+        "source": "OPPORTUNITY",
+        "section": "Stack",
+        "excerpt": "Une stack moderne : Angular, Java, MongoDB – tu maîtriseras rapidement le fullstack si tu le désires."
+      }
+    ]
+  },
+  "companyDescription": {
+    "value": "Entreprise tech travaillant sur des projets utiles pour des comptables et entrepreneurs.",
+    "provenance": "INFERRED",
+    "confidence": "MEDIUM",
+    "evidence": [
+      {
+        "source": "OPPORTUNITY",
+        "section": "Ce que tu vas trouver chez nous",
+        "excerpt": "Des projets utiles : ton travail facilitera vraiment la vie de milliers de comptables et d’entrepreneurs."
+      }
+    ]
+  },
+  "responsibilities": [
+    {
+      "value": "Développer des fonctionnalités web avec l’encadrement de développeurs expérimentés.",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce que tu feras",
+          "excerpt": "Développer des fonctionnalités web encadré·e par des développeurs expérimentés."
+        }
+      ]
+    },
+    {
+      "value": "Participer aux rituels agiles et aux décisions techniques.",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce que tu feras",
+          "excerpt": "Participer aux rituels agiles et aux décisions techniques."
+        }
+      ]
+    },
+    {
+      "value": "Apprendre les bonnes pratiques de code, de tests et de livraison continue.",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce que tu feras",
+          "excerpt": "Apprendre les bonnes pratiques de code, de tests, et de livraison continue."
+        }
+      ]
+    },
+    {
+      "value": "Travailler sur des projets mis en production rapidement.",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce que tu feras",
+          "excerpt": "Travailler sur des projets qui partent en production rapidement."
+        }
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "id": "REQ-001",
+      "label": "Être en sortie de formation en développement ou disposer d’une première expérience",
+      "category": "PROFESSIONAL_EXPERIENCE",
+      "priority": "CONTEXTUAL",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "details": "Le texte positionne clairement le poste pour un profil junior ou en début de carrière.",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Introduction",
+          "excerpt": "Tu sors d’une formation en développement ou tu as déjà une première expérience ?"
+        }
+      ]
+    },
+    {
+      "id": "REQ-002",
+      "label": "Être diplômé·e en informatique, ingénieur informatique ou autodidacte avec des projets concrets",
+      "category": "EDUCATION",
+      "priority": "MANDATORY",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "details": "L’annonce accepte plusieurs parcours alternatifs, mais exige une base démontrable en développement.",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Diplômé·e en informatique, ingénieur informatique ou autodidacte avec des projets concrets."
+        }
+      ]
+    },
+    {
+      "id": "REQ-003",
+      "label": "Avoir pratiqué Angular",
+      "category": "TECHNICAL_SKILL",
+      "priority": "CONTEXTUAL",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "details": "Angular fait partie d’une alternative Angular, Java et/ou MongoDB ; chaque technologie n’est donc pas isolément obligatoire.",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu as touché à Angular, Java et/ou MongoDB (même en projet scolaire)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-004",
+      "label": "Avoir pratiqué Java",
+      "category": "TECHNICAL_SKILL",
+      "priority": "CONTEXTUAL",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "details": "Java fait partie d’une alternative Angular, Java et/ou MongoDB ; une pratique scolaire est explicitement acceptée.",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu as touché à Angular, Java et/ou MongoDB (même en projet scolaire)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-005",
+      "label": "Avoir pratiqué MongoDB",
+      "category": "TECHNICAL_SKILL",
+      "priority": "CONTEXTUAL",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "details": "MongoDB fait partie d’une alternative Angular, Java et/ou MongoDB ; une pratique scolaire est explicitement acceptée.",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu as touché à Angular, Java et/ou MongoDB (même en projet scolaire)."
+        }
+      ]
+    },
+    {
+      "id": "REQ-006",
+      "label": "Être curieux·se, motivé·e et à l’aise pour poser des questions",
+      "category": "SOFT_SKILL",
+      "priority": "MANDATORY",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "details": null,
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu es curieux·se, motivé·e, et tu n’as pas peur de poser des questions."
+        }
+      ]
+    },
+    {
+      "id": "REQ-007",
+      "label": "Aimer travailler en équipe",
+      "category": "SOFT_SKILL",
+      "priority": "MANDATORY",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "details": null,
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu aimes travailler en équipe et apprendre en continu."
+        }
+      ]
+    },
+    {
+      "id": "REQ-008",
+      "label": "Aimer apprendre en continu",
+      "category": "SOFT_SKILL",
+      "priority": "MANDATORY",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "details": null,
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu aimes travailler en équipe et apprendre en continu."
+        }
+      ]
+    }
+  ],
+  "technologies": [
+    {
+      "value": "Angular",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Stack",
+          "excerpt": "Une stack moderne : Angular, Java, MongoDB"
+        }
+      ]
+    },
+    {
+      "value": "Java",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Stack",
+          "excerpt": "Une stack moderne : Angular, Java, MongoDB"
+        }
+      ]
+    },
+    {
+      "value": "MongoDB",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Stack",
+          "excerpt": "Une stack moderne : Angular, Java, MongoDB"
+        }
+      ]
+    },
+    {
+      "value": "CI/CD",
+      "provenance": "INFERRED",
+      "confidence": "MEDIUM",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce que tu feras",
+          "excerpt": "Apprendre les bonnes pratiques de code, de tests, et de livraison continue."
+        }
+      ]
+    }
+  ],
+  "languages": [],
+  "softSkills": [
+    {
+      "value": "Curiosité",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu es curieux·se, motivé·e, et tu n’as pas peur de poser des questions."
+        }
+      ]
+    },
+    {
+      "value": "Motivation",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu es curieux·se, motivé·e, et tu n’as pas peur de poser des questions."
+        }
+      ]
+    },
+    {
+      "value": "Travail en équipe",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu aimes travailler en équipe et apprendre en continu."
+        }
+      ]
+    },
+    {
+      "value": "Apprentissage continu",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu aimes travailler en équipe et apprendre en continu."
+        }
+      ]
+    }
+  ],
+  "benefits": [
+    {
+      "value": "CDI avec package compétitif",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce qu’on t’offre",
+          "excerpt": "CDI avec package compétitif."
+        }
+      ]
+    },
+    {
+      "value": "Télétravail partiel et horaires flexibles",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce qu’on t’offre",
+          "excerpt": "Télétravail partiel possible, horaires flexibles."
+        }
+      ]
+    },
+    {
+      "value": "Perspectives d’évolution technique ou fonctionnelle",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce qu’on t’offre",
+          "excerpt": "Perspectives d’évolution technique ou fonctionnelle."
+        }
+      ]
+    }
+  ],
+  "employmentSignals": {
+    "mentoring": {
+      "status": "PRESENT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce que tu vas trouver chez nous",
+          "excerpt": "Un accompagnement solide : mentoring, code reviews, pair programming"
+        }
+      ]
+    },
+    "training": {
+      "status": "PRESENT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce que tu feras",
+          "excerpt": "Apprendre les bonnes pratiques de code, de tests, et de livraison continue."
+        }
+      ]
+    },
+    "teamCollaboration": {
+      "status": "PRESENT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce que tu vas trouver chez nous",
+          "excerpt": "Une équipe dynamique et humaine, où chaque voix compte."
+        }
+      ]
+    },
+    "careerProgression": {
+      "status": "PRESENT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ce qu’on t’offre",
+          "excerpt": "Perspectives d’évolution technique ou fonctionnelle."
+        }
+      ]
+    }
+  },
+  "unknowns": [
+    {
+      "code": "LOCATION_NOT_PROVIDED",
+      "path": "/identity/location",
+      "reason": "SOURCE_NOT_PROVIDED",
+      "details": "Le texte copié ne précise pas le lieu de travail."
+    }
+  ],
+  "warnings": [
+    {
+      "code": "TITLE_INFERRED",
+      "severity": "INFO",
+      "path": "/identity/title",
+      "message": "Le titre exact du poste n’est pas présent dans le texte fourni et a été inféré à partir du niveau attendu et de la stack."
+    },
+    {
+      "code": "ALTERNATIVE_TECH_STACK",
+      "severity": "INFO",
+      "path": "/requirements",
+      "message": "La formulation « Angular, Java et/ou MongoDB » indique une alternative : l’absence d’une technologie ne constitue pas automatiquement un manque critique."
+    }
+  ]
+}

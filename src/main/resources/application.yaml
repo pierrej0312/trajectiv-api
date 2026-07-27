@@ -43,10 +43,14 @@ spring:
     init:
       mode: never
 
+  http:
+    converters:
+      preferred-json-mapper: jackson2
+
   servlet:
     multipart:
-      max-file-size: 2MB
-      max-request-size: 2MB
+      max-file-size: 10MB
+      max-request-size: 10MB
 
   security:
     oauth2:
@@ -102,9 +106,20 @@ trajectiv:
   storage:
     provider: ${STORAGE_PROVIDER:local}
     local-root: ${STORAGE_LOCAL_ROOT:./storage}
-    public-base-url: ${STORAGE_PUBLIC_BASE_URL:http://localhost:8081/files}
-    max-avatar-size-bytes: ${STORAGE_MAX_AVATAR_SIZE_BYTES:2097152}
+    public-base-url: ${STORAGE_PUBLIC_BASE_URL:http://localhost:8081/api/files}
+    max-avatar-size-bytes: ${STORAGE_MAX_AVATAR_SIZE_BYTES:10485760}
 
   mail:
     from-address: ${MAIL_FROM:no-reply@trajectiv.local}
     invitation-base-url: ${INVITATION_BASE_URL:http://localhost:4200/invitations/accept}
+
+  ai:
+    ollama:
+      base-url: ${OLLAMA_BASE_URL:http://localhost:11434}
+      model: ${OLLAMA_MODEL:qwen3:8b-q4_K_M}
+      connect-timeout: ${OLLAMA_CONNECT_TIMEOUT:5s}
+      request-timeout: ${OLLAMA_REQUEST_TIMEOUT:5m}
+      temperature: ${OLLAMA_TEMPERATURE:0.0}
+      num-ctx: ${OLLAMA_NUM_CTX:16384}
+      num-predict: ${OLLAMA_NUM_PREDICT:4096}
+      think: ${OLLAMA_THINK:false}

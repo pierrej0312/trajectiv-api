@@ -17,6 +17,14 @@ public final class ApiRoutes {
         public static final String ME_PROFILE = ME + "/profile";
         public static final String ME_AVATAR = ME + "/avatar";
         public static final String ME_ONBOARDING = ME + "/onboarding";
+        public static final String ME_RESUME_ANALYSES =
+                ME + "/resume-analyses";
+
+        public static final String ME_OPPORTUNITY_ANALYSES =
+                ME + "/opportunity-analyses";
+
+        public static final String ME_RESUME_OPPORTUNITY_MATCHES =
+                ME + "/resume-opportunity-matches";
 
         public static final String OPPORTUNITIES = API_V1 + "/opportunities";
 
@@ -37,5 +45,6 @@ public final class ApiRoutes {
 
         public static final String ORGANIZATION_MEMBERS =
                 ORGANIZATIONS + "/{organizationId}/members";
+
     }
 }

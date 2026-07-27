@@ -1,0 +1,735 @@
+{
+  "schemaVersion": "resume-analysis.v1",
+  "promptVersion": "resume-intelligence.v1",
+  "status": "COMPLETED",
+  "source": {
+    "fileId": "11111111-1111-4111-8111-111111111111",
+    "fileName": "Pierre_Juif_Java_Full_Stack_Developer_Pauwels.pdf",
+    "mimeType": "application/pdf",
+    "pageCount": 1,
+    "textExtractable": true,
+    "extractionStatus": "SUCCESS",
+    "rawTextHash": "641aa3031f68c18f7292d572875f2b3d74b1d79119cd3bd17f5b06e1c28fbda5"
+  },
+  "profile": {
+    "headline": {
+      "value": "Java Full Stack Developer - Java & Angular",
+      "provenance": "EXPLICIT",
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "Java Full Stack Developer - Java & Angular"
+        }
+      ]
+    },
+    "targetRoles": [
+      {
+        "title": "Java Full Stack Developer",
+        "provenance": "EXPLICIT",
+        "confidence": "HIGH",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Java Full Stack Developer - Java & Angular"
+          }
+        ]
+      },
+      {
+        "title": "Angular / Java Fullstack Developer",
+        "provenance": "INFERRED",
+        "confidence": "HIGH",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Angular / TypeScript / NgRx exposure | Java / Spring / Maven | REST APIs | OIDC | SQL"
+          }
+        ]
+      }
+    ],
+    "careerStory": {
+      "summary": "Développeur orienté full stack avec plus de six ans d’expérience professionnelle en frontend Angular/React et une spécialisation actuelle en Java, Spring Boot et cybersécurité.",
+      "transitions": [
+        {
+          "value": "Le parcours évolue de l’UX/UI vers le développement frontend Angular/React, puis vers une spécialisation full stack Java/Angular.",
+          "provenance": "INFERRED",
+          "confidence": "HIGH",
+          "evidence": [
+            {
+              "source": "RESUME",
+              "page": 1,
+              "excerpt": "UX/UI Designer & Front-End Developer | Freelance | 2018 - 2020"
+            },
+            {
+              "source": "RESUME",
+              "page": 1,
+              "excerpt": "UX/UI Designer & Front-End Developer Angular | Proxistore | 2020 - 2024"
+            },
+            {
+              "source": "RESUME",
+              "page": 1,
+              "excerpt": "Fullstack Java / Angular / Cybersecurity - TechnofuturTIC | Jan 2026 - Jul 2026"
+            }
+          ]
+        }
+      ],
+      "differentiators": [
+        {
+          "value": "Combine une expérience de production frontend/UX avec une montée en compétences structurée sur Java, Spring Boot, sécurité et données relationnelles.",
+          "provenance": "INFERRED",
+          "confidence": "HIGH",
+          "evidence": [
+            {
+              "source": "RESUME",
+              "page": 1,
+              "excerpt": "Strong production background in Angular, React, TypeScript, RxJS, component-based UI, REST API integration, authentication flows and business-facing applications."
+            },
+            {
+              "source": "RESUME",
+              "page": 1,
+              "excerpt": "Currently completing intensive Fullstack Java / Angular / Cybersecurity training with hands-on Java, Spring Boot, Maven, REST APIs, JPA/Hibernate, SQL/PostgreSQL, JWT/RBAC and OpenID Connect concepts."
+            }
+          ]
+        }
+      ],
+      "confidence": "HIGH",
+      "evidence": [
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "Full stack-oriented software developer with 6+ years of professional experience building enterprise web applications, dashboards and API-driven interfaces."
+        }
+      ]
+    },
+    "experiences": [
+      {
+        "organization": "Mediawind",
+        "title": "Front-End Developer Angular / React & UX",
+        "location": null,
+        "employmentType": "FULL_TIME",
+        "startDate": "2024-04",
+        "endDate": "2026-01",
+        "current": false,
+        "dateConfidence": "HIGH",
+        "responsibilities": [
+          {
+            "value": "Développer et maintenir des applications Angular/React dans des environnements de production contraints.",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Developed and maintained Angular/React applications for healthcare and institutional environments with secure, constrained production contexts."
+              }
+            ]
+          },
+          {
+            "value": "Construire des dashboards, widgets KPI, filtres, interfaces de reporting et workflows d’export connectés à des services backend et API REST.",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Built dashboards, KPI widgets, filters, reporting interfaces and export-oriented workflows connected to backend services and REST APIs."
+              }
+            ]
+          }
+        ],
+        "achievements": [],
+        "technologies": [
+          {
+            "name": "Angular",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Front-End Developer Angular / React & UX | Mediawind | Apr 2024 - Jan 2026"
+              }
+            ]
+          },
+          {
+            "name": "React",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Front-End Developer Angular / React & UX | Mediawind | Apr 2024 - Jan 2026"
+              }
+            ]
+          },
+          {
+            "name": "REST APIs",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "connected to backend services and REST APIs"
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Front-End Developer Angular / React & UX | Mediawind | Apr 2024 - Jan 2026"
+          }
+        ]
+      },
+      {
+        "organization": "Proxistore",
+        "title": "UX/UI Designer & Front-End Developer Angular",
+        "location": null,
+        "employmentType": "FULL_TIME",
+        "startDate": "2020",
+        "endDate": "2024",
+        "current": false,
+        "dateConfidence": "HIGH",
+        "responsibilities": [
+          {
+            "value": "Concevoir et développer des plateformes Angular d’analytics et de publicité utilisées dans des workflows métier orientés données.",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Designed and developed Angular analytics and advertising platforms used in data-driven business workflows."
+              }
+            ]
+          }
+        ],
+        "achievements": [],
+        "technologies": [
+          {
+            "name": "Angular",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "UX/UI Designer & Front-End Developer Angular | Proxistore | 2020 - 2024"
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "UX/UI Designer & Front-End Developer Angular | Proxistore | 2020 - 2024"
+          }
+        ]
+      },
+      {
+        "organization": "Freelance",
+        "title": "UX/UI Designer & Front-End Developer",
+        "location": null,
+        "employmentType": "FREELANCE",
+        "startDate": "2018",
+        "endDate": "2020",
+        "current": false,
+        "dateConfidence": "HIGH",
+        "responsibilities": [
+          {
+            "value": "Livrer des interfaces UX/UI, sites responsives et interfaces React/JavaScript pour de petites entreprises.",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Delivered UX/UI, responsive websites and React/JavaScript interfaces for small business projects from need analysis to implementation."
+              }
+            ]
+          }
+        ],
+        "achievements": [],
+        "technologies": [
+          {
+            "name": "React",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "React/JavaScript interfaces"
+              }
+            ]
+          },
+          {
+            "name": "JavaScript",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "React/JavaScript interfaces"
+              }
+            ]
+          }
+        ],
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "UX/UI Designer & Front-End Developer | Freelance | 2018 - 2020"
+          }
+        ]
+      }
+    ],
+    "skillGroups": [
+      {
+        "category": "FRONTEND",
+        "label": "Frontend",
+        "skills": [
+          {
+            "name": "Angular",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Angular, TypeScript, JavaScript, RxJS, Signals, SASS/SCSS, HTML5, PrimeNG"
+              }
+            ]
+          },
+          {
+            "name": "TypeScript",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Angular, TypeScript, JavaScript, RxJS, Signals, SASS/SCSS, HTML5, PrimeNG"
+              }
+            ]
+          },
+          {
+            "name": "RxJS",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Angular, TypeScript, JavaScript, RxJS, Signals, SASS/SCSS, HTML5, PrimeNG"
+              }
+            ]
+          },
+          {
+            "name": "Signals",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Angular, TypeScript, JavaScript, RxJS, Signals, SASS/SCSS, HTML5, PrimeNG"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category": "BACKEND",
+        "label": "Backend",
+        "skills": [
+          {
+            "name": "Java",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Java, Spring Boot, Maven, REST APIs, JPA/Hibernate, validation, service-layer logic"
+              }
+            ]
+          },
+          {
+            "name": "Spring Boot",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Java, Spring Boot, Maven, REST APIs, JPA/Hibernate, validation, service-layer logic"
+              }
+            ]
+          },
+          {
+            "name": "JPA/Hibernate",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Java, Spring Boot, Maven, REST APIs, JPA/Hibernate, validation, service-layer logic"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category": "DATA",
+        "label": "Data",
+        "skills": [
+          {
+            "name": "SQL",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "SQL, PostgreSQL, relational modelling"
+              }
+            ]
+          },
+          {
+            "name": "PostgreSQL",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "SQL, PostgreSQL, relational modelling"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category": "SECURITY",
+        "label": "Security & Identity",
+        "skills": [
+          {
+            "name": "OpenID Connect",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "OpenID Connect concepts, JWT, RBAC, authentication and authorization flows"
+              }
+            ]
+          },
+          {
+            "name": "JWT",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "OpenID Connect concepts, JWT, RBAC, authentication and authorization flows"
+              }
+            ]
+          },
+          {
+            "name": "RBAC",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "OpenID Connect concepts, JWT, RBAC, authentication and authorization flows"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "category": "TOOLS",
+        "label": "Tools",
+        "skills": [
+          {
+            "name": "Git",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Git, GitHub/GitLab, Jira, Postman, Docker, Maven/npm"
+              }
+            ]
+          },
+          {
+            "name": "Docker",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Git, GitHub/GitLab, Jira, Postman, Docker, Maven/npm"
+              }
+            ]
+          },
+          {
+            "name": "Maven",
+            "provenance": "EXPLICIT",
+            "confidence": "HIGH",
+            "evidence": [
+              {
+                "source": "RESUME",
+                "page": 1,
+                "excerpt": "Git, GitHub/GitLab, Jira, Postman, Docker, Maven/npm"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "education": [
+      {
+        "qualification": "Fullstack Java / Angular / Cybersecurity training",
+        "field": "Software development and cybersecurity",
+        "institution": "TechnofuturTIC",
+        "startDate": "2026-01",
+        "endDate": "2026-07",
+        "status": "IN_PROGRESS",
+        "confidence": "HIGH",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Fullstack Java / Angular / Cybersecurity - TechnofuturTIC | Jan 2026 - Jul 2026"
+          }
+        ]
+      },
+      {
+        "qualification": "UX/UI & Web Development",
+        "field": "UX/UI and web development",
+        "institution": null,
+        "startDate": "2018",
+        "endDate": "2019",
+        "status": "COMPLETED",
+        "confidence": "HIGH",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "UX/UI & Web Development | 2018 - 2019"
+          }
+        ]
+      },
+      {
+        "qualification": "Bachelor in Graphic Design",
+        "field": "Graphic Design",
+        "institution": "Lille University",
+        "startDate": "2012",
+        "endDate": "2015",
+        "status": "COMPLETED",
+        "confidence": "HIGH",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Bachelor in Graphic Design - Lille University | 2012 - 2015"
+          }
+        ]
+      }
+    ],
+    "certifications": [],
+    "languages": [
+      {
+        "name": "French",
+        "level": "Native",
+        "framework": null,
+        "provenance": "EXPLICIT",
+        "confidence": "HIGH",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "French native"
+          }
+        ]
+      },
+      {
+        "name": "English",
+        "level": "Professional B2",
+        "framework": "CEFR",
+        "provenance": "EXPLICIT",
+        "confidence": "HIGH",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "English professional B2"
+          }
+        ]
+      },
+      {
+        "name": "Dutch",
+        "level": "Basic notions",
+        "framework": null,
+        "provenance": "EXPLICIT",
+        "confidence": "HIGH",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Dutch basic notions"
+          }
+        ]
+      }
+    ],
+    "softSkills": [
+      {
+        "name": "Business collaboration",
+        "provenance": "EXPLICIT",
+        "confidence": "HIGH",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "business collaboration"
+          }
+        ]
+      },
+      {
+        "name": "Stakeholder communication",
+        "provenance": "EXPLICIT",
+        "confidence": "HIGH",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Worked with business stakeholders to clarify needs, assess feasibility, document interface behaviour and deliver application modifications."
+          }
+        ]
+      }
+    ]
+  },
+  "atsReadability": {
+    "status": "PASS",
+    "textExtraction": {
+      "status": "PASS",
+      "details": "Le PDF fournit un texte exploitable sur une page.",
+      "unknownReason": null,
+      "extractedCharacterCount": 6547
+    },
+    "sectionDetection": {
+      "status": "PASS",
+      "detectedSections": [
+        "CONTACT",
+        "HEADLINE",
+        "PROFILE",
+        "SKILLS",
+        "EXPERIENCE",
+        "EDUCATION",
+        "LANGUAGES"
+      ],
+      "missingSections": [
+        "CERTIFICATIONS",
+        "PROJECTS"
+      ],
+      "details": "Les sections essentielles sont détectées. Les sections certifications et projets ne sont pas présentes.",
+      "unknownReason": null
+    },
+    "readingOrder": {
+      "status": "PASS",
+      "details": "L’ordre extrait reste cohérent du profil vers les compétences, l’expérience, la formation et l’éducation.",
+      "unknownReason": null
+    },
+    "dateConsistency": {
+      "status": "PASS",
+      "details": "Les périodes professionnelles et de formation sont lisibles et ne présentent pas de contradiction évidente.",
+      "unknownReason": null
+    },
+    "pageOnePositioning": {
+      "status": "PASS",
+      "details": "Le titre Java Full Stack Developer et la combinaison Java/Angular sont immédiatement visibles.",
+      "unknownReason": null
+    },
+    "issues": []
+  },
+  "recruiterScan": {
+    "status": "WARNING",
+    "twentySecondSummary": "Profil expérimenté en frontend Angular/React et UX, actuellement en spécialisation Java/Spring. La valeur immédiate en Angular est claire, mais l’expérience backend Java reste principalement démontrée par la formation et les projets pratiques.",
+    "targetClarity": "STRONG",
+    "relevantSkillsVisibility": "STRONG",
+    "experienceCredibility": "ADEQUATE",
+    "differentiation": "STRONG",
+    "mainStrengths": [
+      {
+        "label": "Expérience frontend de production",
+        "details": "Le CV montre plusieurs années sur Angular/React, dashboards, API REST et applications métier.",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Full stack-oriented software developer with 6+ years of professional experience building enterprise web applications, dashboards and API-driven interfaces."
+          }
+        ]
+      },
+      {
+        "label": "Positionnement hybride",
+        "details": "Le profil combine frontend, UX/UI, compréhension métier et progression Java/Spring.",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Able to bring immediate value on Angular/frontend, application stability, technical analysis and business collaboration while contributing to Java/Spring feature development and bug fixing."
+          }
+        ]
+      }
+    ],
+    "mainConcerns": [
+      {
+        "label": "Expérience Java professionnelle limitée",
+        "details": "Le CV présente Java/Spring dans la formation et les projets pratiques, sans expérience professionnelle backend Java clairement attribuée.",
+        "evidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Currently completing intensive Fullstack Java / Angular / Cybersecurity training with hands-on Java, Spring Boot, Maven, REST APIs, JPA/Hibernate, SQL/PostgreSQL, JWT/RBAC and OpenID Connect concepts."
+          }
+        ]
+      }
+    ],
+    "confidence": "HIGH",
+    "unknownReason": null
+  },
+  "unknowns": [
+    {
+      "code": "CERTIFICATIONS_NOT_PROVIDED",
+      "path": "/profile/certifications",
+      "reason": "SOURCE_NOT_PROVIDED",
+      "details": "Le CV ne mentionne aucune certification distincte."
+    }
+  ],
+  "warnings": [
+    {
+      "code": "JAVA_EXPERIENCE_CONTEXT",
+      "severity": "WARNING",
+      "path": "/profile/skillGroups",
+      "message": "La présence de Java et Spring Boot est explicite, mais le contexte principal est la formation actuelle et non une expérience backend professionnelle démontrée."
+    }
+  ]
+}

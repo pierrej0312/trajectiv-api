@@ -1,0 +1,653 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.trajectiv.app/ai/opportunity-analysis.v1.schema.json",
+  "title": "Trajectiv Opportunity Analysis v1",
+  "description": "Structured extraction of a manually supplied opportunity description, grounded in source excerpts.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "promptVersion",
+    "status",
+    "source",
+    "identity",
+    "summary",
+    "companyDescription",
+    "responsibilities",
+    "requirements",
+    "technologies",
+    "languages",
+    "softSkills",
+    "benefits",
+    "employmentSignals",
+    "unknowns",
+    "warnings"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "opportunity-analysis.v1"
+    },
+    "promptVersion": {
+      "const": "opportunity-extract.v1"
+    },
+    "status": {
+      "$ref": "#/$defs/analysisStatus"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "inputType",
+        "sourceUrl",
+        "rawTextHash"
+      ],
+      "properties": {
+        "inputType": {
+          "type": "string",
+          "enum": [
+            "MANUAL_TEXT",
+            "URL_TEXT",
+            "FILE_TEXT"
+          ]
+        },
+        "sourceUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri",
+          "maxLength": 2000
+        },
+        "rawTextHash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "company",
+        "location",
+        "remotePolicy",
+        "employmentType",
+        "seniority"
+      ],
+      "properties": {
+        "title": {
+          "$ref": "#/$defs/identityField"
+        },
+        "company": {
+          "$ref": "#/$defs/identityField"
+        },
+        "location": {
+          "$ref": "#/$defs/identityField"
+        },
+        "remotePolicy": {
+          "$ref": "#/$defs/identityField"
+        },
+        "employmentType": {
+          "$ref": "#/$defs/identityField"
+        },
+        "seniority": {
+          "$ref": "#/$defs/identityField"
+        }
+      }
+    },
+    "summary": {
+      "$ref": "#/$defs/nullableGroundedText"
+    },
+    "companyDescription": {
+      "$ref": "#/$defs/nullableGroundedText"
+    },
+    "responsibilities": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/groundedStatement"
+      },
+      "maxItems": 60
+    },
+    "requirements": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/requirement"
+      },
+      "maxItems": 120
+    },
+    "technologies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/groundedStatement"
+      },
+      "maxItems": 80
+    },
+    "languages": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/groundedStatement"
+      },
+      "maxItems": 30
+    },
+    "softSkills": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/groundedStatement"
+      },
+      "maxItems": 40
+    },
+    "benefits": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/groundedStatement"
+      },
+      "maxItems": 40
+    },
+    "employmentSignals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mentoring",
+        "training",
+        "teamCollaboration",
+        "careerProgression"
+      ],
+      "properties": {
+        "mentoring": {
+          "$ref": "#/$defs/signal"
+        },
+        "training": {
+          "$ref": "#/$defs/signal"
+        },
+        "teamCollaboration": {
+          "$ref": "#/$defs/signal"
+        },
+        "careerProgression": {
+          "$ref": "#/$defs/signal"
+        }
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unknownItem"
+      },
+      "maxItems": 100
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/warning"
+      },
+      "maxItems": 100
+    }
+  },
+  "$defs": {
+    "analysisStatus": {
+      "type": "string",
+      "enum": [
+        "COMPLETED",
+        "PARTIAL",
+        "FAILED"
+      ],
+      "description": "Macro-status of the analysis execution."
+    },
+    "provenance": {
+      "type": "string",
+      "enum": [
+        "EXPLICIT",
+        "INFERRED",
+        "UNKNOWN"
+      ],
+      "description": "How the information was obtained from the source."
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "HIGH",
+        "MEDIUM",
+        "LOW"
+      ],
+      "description": "Confidence in extraction or interpretation, not in candidate quality."
+    },
+    "controlStatus": {
+      "type": "string",
+      "enum": [
+        "PASS",
+        "WARNING",
+        "FAIL",
+        "UNKNOWN"
+      ],
+      "description": "Outcome of a deterministic or interpretive control."
+    },
+    "assessmentLevel": {
+      "type": "string",
+      "enum": [
+        "STRONG",
+        "ADEQUATE",
+        "WEAK",
+        "UNKNOWN"
+      ],
+      "description": "Qualitative assessment used for recruiter-readability dimensions."
+    },
+    "unknownReason": {
+      "type": "string",
+      "enum": [
+        "SOURCE_NOT_PROVIDED",
+        "EXTRACTION_PARTIAL",
+        "AMBIGUOUS_WORDING",
+        "CONFLICTING_INFORMATION",
+        "INSUFFICIENT_CONTEXT",
+        "MODEL_UNCERTAIN"
+      ]
+    },
+    "partialDate": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(?:\\d{4}|\\d{4}-(?:0[1-9]|1[0-2]))$",
+      "description": "YYYY or YYYY-MM. Null when unavailable."
+    },
+    "warning": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "severity",
+        "path",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{2,63}$"
+        },
+        "severity": {
+          "type": "string",
+          "enum": [
+            "INFO",
+            "WARNING",
+            "ERROR"
+          ]
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 240
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "unknownItem": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "path",
+        "reason",
+        "details"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9_]{2,63}$"
+        },
+        "path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 240
+        },
+        "reason": {
+          "$ref": "#/$defs/unknownReason"
+        },
+        "details": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source",
+        "section",
+        "excerpt"
+      ],
+      "properties": {
+        "source": {
+          "const": "OPPORTUNITY"
+        },
+        "section": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 160
+        },
+        "excerpt": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 700
+        }
+      }
+    },
+    "nullableGroundedText": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "provenance",
+        "confidence",
+        "evidence"
+      ],
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 3000
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "maxItems": 20
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            },
+            "required": [
+              "value"
+            ]
+          },
+          "then": {
+            "properties": {
+              "provenance": {
+                "const": "UNKNOWN"
+              },
+              "evidence": {
+                "maxItems": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "provenance": {
+                "enum": [
+                  "EXPLICIT",
+                  "INFERRED"
+                ]
+              },
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "groundedStatement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "provenance",
+        "confidence",
+        "evidence"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "EXPLICIT",
+            "INFERRED"
+          ]
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1,
+          "maxItems": 20
+        }
+      }
+    },
+    "identityField": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "provenance",
+        "confidence",
+        "evidence"
+      ],
+      "properties": {
+        "value": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        },
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "maxItems": 12
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "null"
+              }
+            },
+            "required": [
+              "value"
+            ]
+          },
+          "then": {
+            "properties": {
+              "provenance": {
+                "const": "UNKNOWN"
+              },
+              "evidence": {
+                "maxItems": 0
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "provenance": {
+                "enum": [
+                  "EXPLICIT",
+                  "INFERRED"
+                ]
+              },
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    },
+    "requirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "label",
+        "category",
+        "priority",
+        "provenance",
+        "confidence",
+        "details",
+        "evidence"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^REQ-\\d{3}$"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 300
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "TECHNICAL_SKILL",
+            "PROFESSIONAL_EXPERIENCE",
+            "EDUCATION",
+            "CERTIFICATION",
+            "LANGUAGE",
+            "SOFT_SKILL",
+            "METHODOLOGY",
+            "DOMAIN_KNOWLEDGE",
+            "LOCATION",
+            "AVAILABILITY",
+            "WORK_AUTHORIZATION",
+            "OTHER"
+          ]
+        },
+        "priority": {
+          "type": "string",
+          "enum": [
+            "MANDATORY",
+            "PREFERRED",
+            "CONTEXTUAL",
+            "UNKNOWN"
+          ]
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "EXPLICIT",
+            "INFERRED"
+          ]
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "details": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 1200
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1,
+          "maxItems": 20
+        }
+      }
+    },
+    "signal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "confidence",
+        "evidence"
+      ],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": [
+            "PRESENT",
+            "NOT_MENTIONED",
+            "UNKNOWN"
+          ]
+        },
+        "confidence": {
+          "$ref": "#/$defs/confidence"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "maxItems": 10
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "PRESENT"
+              }
+            },
+            "required": [
+              "status"
+            ]
+          },
+          "then": {
+            "properties": {
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "evidence": {
+                "maxItems": 0
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,390 @@
+{
+  "schemaVersion": "resume-opportunity-match.v1",
+  "promptVersion": "resume-opportunity-match.v1",
+  "status": "COMPLETED",
+  "resumeAnalysisId": "22222222-2222-4222-8222-222222222222",
+  "opportunityAnalysisId": "33333333-3333-4333-8333-333333333333",
+  "recommendation": "TAILOR_BEFORE_APPLYING",
+  "summary": "Le profil correspond fortement à Angular, au travail en équipe et à l’apprentissage continu. Java est démontré par la formation et les projets pratiques, tandis que MongoDB n’apparaît pas dans le CV. Le CV devrait être adapté pour clarifier la motivation à rejoindre un poste junior full stack malgré une expérience frontend plus avancée.",
+  "requirementCoverage": {
+    "status": "WARNING",
+    "coveragePercent": 71.43,
+    "totalRequirements": 8,
+    "evaluableRequirements": 7,
+    "matched": 4,
+    "partial": 2,
+    "missing": 1,
+    "unknown": 1,
+    "mandatory": {
+      "matched": 2,
+      "partial": 1,
+      "missing": 0,
+      "unknown": 1
+    },
+    "preferred": {
+      "matched": 0,
+      "partial": 0,
+      "missing": 0,
+      "unknown": 0
+    },
+    "contextual": {
+      "matched": 2,
+      "partial": 1,
+      "missing": 1,
+      "unknown": 0
+    },
+    "calculationMethod": "MATCHED_1_PARTIAL_0_5_MISSING_0_UNKNOWN_EXCLUDED"
+  },
+  "requirementMatches": [
+    {
+      "requirementId": "REQ-001",
+      "status": "MATCHED",
+      "matchBasis": "PROFESSIONAL_EXPERIENCE",
+      "explanation": "Le CV dépasse le niveau minimum demandé : il présente plus de six ans d’expérience professionnelle en développement frontend et une formation full stack en cours.",
+      "resumeEvidence": [
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "Full stack-oriented software developer with 6+ years of professional experience building enterprise web applications, dashboards and API-driven interfaces."
+        },
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "Fullstack Java / Angular / Cybersecurity - TechnofuturTIC | Jan 2026 - Jul 2026"
+        }
+      ],
+      "opportunityEvidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Introduction",
+          "excerpt": "Tu sors d’une formation en développement ou tu as déjà une première expérience ?"
+        }
+      ],
+      "confidence": "HIGH",
+      "unknownReason": null
+    },
+    {
+      "requirementId": "REQ-002",
+      "status": "PARTIAL",
+      "matchBasis": "TRAINING",
+      "explanation": "Le CV ne présente pas de diplôme informatique, mais montre une formation intensive Java/Angular/Cybersécurité et plusieurs années de projets professionnels web. Le statut exact « autodidacte avec des projets concrets » n’est pas explicitement revendiqué.",
+      "resumeEvidence": [
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "Fullstack Java / Angular / Cybersecurity - TechnofuturTIC | Jan 2026 - Jul 2026"
+        },
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "Full stack-oriented software developer with 6+ years of professional experience building enterprise web applications, dashboards and API-driven interfaces."
+        }
+      ],
+      "opportunityEvidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Diplômé·e en informatique, ingénieur informatique ou autodidacte avec des projets concrets."
+        }
+      ],
+      "confidence": "HIGH",
+      "unknownReason": null
+    },
+    {
+      "requirementId": "REQ-003",
+      "status": "MATCHED",
+      "matchBasis": "PROFESSIONAL_EXPERIENCE",
+      "explanation": "Angular est démontré par plusieurs expériences professionnelles et figure dans le titre, le profil, les compétences et les missions.",
+      "resumeEvidence": [
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "UX/UI Designer & Front-End Developer Angular | Proxistore | 2020 - 2024"
+        },
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "Front-End Developer Angular / React & UX | Mediawind | Apr 2024 - Jan 2026"
+        }
+      ],
+      "opportunityEvidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu as touché à Angular, Java et/ou MongoDB (même en projet scolaire)."
+        }
+      ],
+      "confidence": "HIGH",
+      "unknownReason": null
+    },
+    {
+      "requirementId": "REQ-004",
+      "status": "PARTIAL",
+      "matchBasis": "TRAINING",
+      "explanation": "Java et Spring Boot sont explicitement pratiqués dans la formation et des projets pratiques, mais le CV ne démontre pas encore d’expérience professionnelle backend Java.",
+      "resumeEvidence": [
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "Hands-on Java / Spring Boot, Maven, REST API design, JPA/Hibernate, PostgreSQL/SQL, authentication, JWT/RBAC, OpenID Connect and API protection."
+        }
+      ],
+      "opportunityEvidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu as touché à Angular, Java et/ou MongoDB (même en projet scolaire)."
+        }
+      ],
+      "confidence": "HIGH",
+      "unknownReason": null
+    },
+    {
+      "requirementId": "REQ-005",
+      "status": "MISSING",
+      "matchBasis": "NONE",
+      "explanation": "MongoDB est mentionné dans l’annonce, mais aucune preuve de pratique de MongoDB n’apparaît dans le CV analysé.",
+      "resumeEvidence": [],
+      "opportunityEvidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu as touché à Angular, Java et/ou MongoDB (même en projet scolaire)."
+        }
+      ],
+      "confidence": "HIGH",
+      "unknownReason": null
+    },
+    {
+      "requirementId": "REQ-006",
+      "status": "UNKNOWN",
+      "matchBasis": "UNKNOWN",
+      "explanation": "Le CV ne permet pas d’évaluer de manière fiable la curiosité, la motivation ou l’aisance à poser des questions. Ces éléments nécessitent un échange ou des preuves comportementales supplémentaires.",
+      "resumeEvidence": [],
+      "opportunityEvidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu es curieux·se, motivé·e, et tu n’as pas peur de poser des questions."
+        }
+      ],
+      "confidence": "HIGH",
+      "unknownReason": "INSUFFICIENT_CONTEXT"
+    },
+    {
+      "requirementId": "REQ-007",
+      "status": "MATCHED",
+      "matchBasis": "PROFESSIONAL_EXPERIENCE",
+      "explanation": "Le CV fournit des preuves explicites de collaboration avec les équipes backend et les parties prenantes métier.",
+      "resumeEvidence": [
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "collaborated with backend teams on API contracts and data flows."
+        },
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "Worked with business stakeholders to clarify needs, assess feasibility, document interface behaviour and deliver application modifications."
+        }
+      ],
+      "opportunityEvidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu aimes travailler en équipe et apprendre en continu."
+        }
+      ],
+      "confidence": "HIGH",
+      "unknownReason": null
+    },
+    {
+      "requirementId": "REQ-008",
+      "status": "MATCHED",
+      "matchBasis": "TRAINING",
+      "explanation": "La formation intensive en cours, ajoutée à un parcours de spécialisation vers Java/Spring, constitue une preuve forte d’apprentissage continu.",
+      "resumeEvidence": [
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "Currently completing intensive Fullstack Java / Angular / Cybersecurity training"
+        },
+        {
+          "source": "RESUME",
+          "page": 1,
+          "excerpt": "Practical projects combining Angular frontend, Java backend, structured data, business logic and authorization flows."
+        }
+      ],
+      "opportunityEvidence": [
+        {
+          "source": "OPPORTUNITY",
+          "section": "Ton profil",
+          "excerpt": "Tu aimes travailler en équipe et apprendre en continu."
+        }
+      ],
+      "confidence": "HIGH",
+      "unknownReason": null
+    }
+  ],
+  "atsFit": {
+    "status": "WARNING",
+    "keywordCoveragePercent": 80.0,
+    "matchedKeywords": [
+      "Angular",
+      "Java",
+      "Agile/Scrum",
+      "CI/CD"
+    ],
+    "missingKeywords": [
+      "MongoDB"
+    ],
+    "parsingRisks": [],
+    "limitations": [
+      "Cette couverture de mots-clés ne représente pas une probabilité d’entretien ni le comportement d’un ATS spécifique.",
+      "La correspondance Java repose principalement sur la formation et doit rester distincte d’une expérience professionnelle backend."
+    ]
+  },
+  "recruiterFit": {
+    "status": "WARNING",
+    "twentySecondVerdict": "Le CV paraît immédiatement pertinent pour Angular et montre une transition crédible vers Java. Le principal doute porte moins sur la capacité technique que sur l’adéquation à un poste explicitement junior et sur l’absence de MongoDB.",
+    "targetClarity": "STRONG",
+    "relevanceVisibility": "STRONG",
+    "evidenceStrength": "ADEQUATE",
+    "seniorityCoherence": "WEAK",
+    "strongestEvidence": [
+      {
+        "label": "Angular professionnel",
+        "details": "Plusieurs expériences professionnelles Angular rendent la correspondance frontend immédiatement crédible.",
+        "relatedRequirementIds": [
+          "REQ-003"
+        ],
+        "resumeEvidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "UX/UI Designer & Front-End Developer Angular | Proxistore | 2020 - 2024"
+          },
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Front-End Developer Angular / React & UX | Mediawind | Apr 2024 - Jan 2026"
+          }
+        ]
+      },
+      {
+        "label": "Progression full stack démontrée",
+        "details": "La formation actuelle rend crédible la volonté de progresser vers Java/Spring dans un cadre mentoré.",
+        "relatedRequirementIds": [
+          "REQ-001",
+          "REQ-004",
+          "REQ-008"
+        ],
+        "resumeEvidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Fullstack Java / Angular / Cybersecurity - TechnofuturTIC | Jan 2026 - Jul 2026"
+          }
+        ]
+      }
+    ],
+    "mainConcerns": [
+      {
+        "label": "Cohérence avec le niveau junior",
+        "details": "Les six années d’expérience frontend peuvent provoquer une question sur les attentes salariales, la stabilité et la motivation à rejoindre un poste junior.",
+        "relatedRequirementIds": [
+          "REQ-001"
+        ],
+        "resumeEvidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Full stack-oriented software developer with 6+ years of professional experience"
+          }
+        ]
+      },
+      {
+        "label": "Java encore principalement en formation",
+        "details": "Le CV doit mieux mettre en avant un projet Java/Spring concret sans présenter la formation comme une expérience professionnelle.",
+        "relatedRequirementIds": [
+          "REQ-004"
+        ],
+        "resumeEvidence": [
+          {
+            "source": "RESUME",
+            "page": 1,
+            "excerpt": "Hands-on Java / Spring Boot, Maven, REST API design, JPA/Hibernate, PostgreSQL/SQL"
+          }
+        ]
+      }
+    ]
+  },
+  "criticalGaps": [
+    {
+      "priority": "MEDIUM",
+      "title": "MongoDB absent du CV",
+      "details": "L’annonce accepte Angular, Java et/ou MongoDB ; ce manque n’est pas bloquant, mais il doit être reconnu sans prétendre à une expérience inexistante.",
+      "relatedRequirementIds": [
+        "REQ-005"
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "title": "Motivation pour un poste junior à clarifier",
+      "details": "Le parcours frontend expérimenté peut sembler surqualifié. La candidature doit expliquer clairement que l’objectif est d’acquérir une expérience full stack Java dans un environnement mentoré.",
+      "relatedRequirementIds": [
+        "REQ-001"
+      ]
+    }
+  ],
+  "priorityChanges": [
+    {
+      "priority": "HIGH",
+      "title": "Adapter le résumé au contexte junior full stack",
+      "rationale": "Préciser que l’expérience frontend permet une contribution immédiate tandis que l’objectif recherché est de consolider Java/Spring avec mentoring et code review.",
+      "relatedRequirementIds": [
+        "REQ-001",
+        "REQ-004"
+      ]
+    },
+    {
+      "priority": "HIGH",
+      "title": "Rendre un projet Java/Spring concret plus visible",
+      "rationale": "Ajouter une preuve courte et factuelle d’un projet de formation : problème traité, API créée, sécurité ou persistance mise en œuvre. Ne pas le présenter comme une expérience professionnelle.",
+      "relatedRequirementIds": [
+        "REQ-002",
+        "REQ-004"
+      ]
+    },
+    {
+      "priority": "MEDIUM",
+      "title": "Traiter MongoDB avec transparence",
+      "rationale": "Ne pas ajouter MongoDB comme compétence maîtrisée. Mentionner une expérience SQL/PostgreSQL solide et une capacité d’apprentissage des bases documentaires uniquement si elle peut être défendue en entretien.",
+      "relatedRequirementIds": [
+        "REQ-005"
+      ]
+    }
+  ],
+  "unknowns": [
+    {
+      "code": "MOTIVATION_NOT_VERIFIABLE",
+      "path": "/requirementMatches/5",
+      "reason": "INSUFFICIENT_CONTEXT",
+      "details": "La motivation, la curiosité et l’aisance à poser des questions ne peuvent pas être évaluées fiablement à partir du CV seul."
+    }
+  ],
+  "warnings": [
+    {
+      "code": "COVERAGE_NOT_PROBABILITY",
+      "severity": "INFO",
+      "path": "/requirementCoverage/coveragePercent",
+      "message": "Le pourcentage mesure uniquement la couverture pondérée des exigences évaluables. Il ne prédit pas un entretien et ne simule aucun ATS particulier."
+    },
+    {
+      "code": "ALTERNATIVE_STACK_REQUIREMENT",
+      "severity": "INFO",
+      "path": "/requirementMatches",
+      "message": "Angular, Java et MongoDB sont formulés avec « et/ou ». L’absence de MongoDB ne doit donc pas être interprétée comme un échec obligatoire."
+    }
+  ]
+}
